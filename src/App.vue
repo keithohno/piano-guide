@@ -1,5 +1,5 @@
 <template>
-  <Piano :bpm="180" :key_="'D'" />
+  <Piano :bpm="180" :key_="14" />
 </template>
 
 <script>

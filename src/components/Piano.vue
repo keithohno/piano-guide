@@ -1,55 +1,30 @@
 <template>
   <h1>Piano :)</h1>
   <button @click="play">CLICK</button>
+  <Keys :key_data="key_data" />
 </template>
 
 <script>
 import * as Tone from "tone";
+import Keys from "./Keys.vue";
 
 export default {
   name: "Piano",
+  components: {
+    Keys,
+  },
   props: {
     bpm: Number,
     key_: Number,
   },
   data: function () {
     return {
-      keys: Array,
+      key_data: Array(25).fill(0),
     };
   },
   computed: {
     keyhz() {
-      console.log(this.key_);
-      switch (this.key_) {
-        default:
-        case "C":
-          return 261.63;
-        case "C#":
-        case "Db":
-          return 277.18;
-        case "D":
-          return 293.66;
-        case "Eb":
-          return 311.13;
-        case "E":
-          return 329.63;
-        case "F":
-          return 349.23;
-        case "F#":
-        case "Gb":
-          return 369.99;
-        case "G":
-          return 392.0;
-        case "Ab":
-          return 415.3;
-        case "A":
-          return 440.0;
-        case "Bb":
-          return 466.16;
-        case "B":
-        case "Cb":
-          return 493.88;
-      }
+      return 130.82 * Math.pow(1.0594631, this.key_);
     },
   },
   methods: {
@@ -64,21 +39,16 @@ export default {
           return "1n";
       }
     },
-    to_key(chord) {
-      if (!Array.isArray(chord)) {
-        chord = [chord];
+    to_half_steps(scale_num) {
+      if (scale_num % 12 < 4) {
+        return scale_num * 2 - 2;
+      } else {
+        return scale_num * 2 - 3;
       }
-      let out_chord = [];
-      for (let note of chord) {
-        note *= 2;
-        if (note < 7) {
-          note -= 2;
-        } else {
-          note -= 3;
-        }
-        out_chord.push(this.keyhz * Math.pow(1.0594631, note));
-      }
-      return out_chord;
+    },
+    to_key(note) {
+      note = this.to_half_steps(note);
+      return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
       let synth = new Tone.PolySynth().toDestination();
@@ -86,10 +56,19 @@ export default {
 
       let part = new Tone.Part(
         (time, val) => {
-          synth.triggerAttackRelease(
-            this.to_key(val.chord),
-            this.to_div(val.duration)
-          );
+          if (!Array.isArray(val.chord)) {
+            val.chord = [val.chord];
+          }
+          for (let note of val.chord) {
+            synth.triggerAttackRelease(
+              this.to_key(note),
+              this.to_div(val.duration)
+            );
+            this.key_data[this.to_half_steps(note) + this.key_] = 1;
+            setTimeout(() => {
+              this.key_data[this.to_half_steps(note) + this.key_] = 0;
+            }, 800 * (60 / this.bpm) * val.duration);
+          }
         },
         [
           { time: "0:0", chord: 3, duration: 1 },
