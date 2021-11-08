@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Piano from "./components/Piano.vue";
+import Piano from "./components/piano/Piano.vue";
 
 export default {
   name: "App",
