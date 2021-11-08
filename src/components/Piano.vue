@@ -23,6 +23,7 @@ export default {
     bpm: Number,
     interactive: Boolean,
     key_preset: Number,
+    music_data: Array,
   },
   data: function () {
     return {
@@ -70,51 +71,21 @@ export default {
       let synth = new Tone.PolySynth().toDestination();
       Tone.Transport.cancel(0);
 
-      let part = new Tone.Part(
-        (time, val) => {
-          if (!Array.isArray(val.chord)) {
-            val.chord = [val.chord];
-          }
-          for (let note of val.chord) {
-            synth.triggerAttackRelease(
-              this.to_key(note),
-              this.to_div(val.duration)
-            );
-            this.key_data[this.to_half_steps(note) + this.keynum] = 1;
-            setTimeout(() => {
-              this.key_data[this.to_half_steps(note) + this.keynum] = 0;
-            }, 800 * (60 / this.bpm) * val.duration);
-          }
-        },
-        [
-          { time: "0:0", chord: 3, duration: 1 },
-          { time: "0:1", chord: 2, duration: 1 },
-          { time: "0:2", chord: 1, duration: 1 },
-          { time: "0:3", chord: 2, duration: 1 },
-          { time: "1:0", chord: 3, duration: 1 },
-          { time: "1:1", chord: 3, duration: 1 },
-          { time: "1:2", chord: 3, duration: 2 },
-          { time: "2:0", chord: 2, duration: 1 },
-          { time: "2:1", chord: 2, duration: 1 },
-          { time: "2:2", chord: 2, duration: 2 },
-          { time: "3:0", chord: 3, duration: 1 },
-          { time: "3:1", chord: 5, duration: 1 },
-          { time: "3:2", chord: 5, duration: 2 },
-          { time: "4:0", chord: 3, duration: 1 },
-          { time: "4:1", chord: 2, duration: 1 },
-          { time: "4:2", chord: 1, duration: 1 },
-          { time: "4:3", chord: 2, duration: 1 },
-          { time: "5:0", chord: 3, duration: 1 },
-          { time: "5:1", chord: 3, duration: 1 },
-          { time: "5:2", chord: 3, duration: 1 },
-          { time: "5:3", chord: 1, duration: 1 },
-          { time: "6:0", chord: 2, duration: 1 },
-          { time: "6:1", chord: 2, duration: 1 },
-          { time: "6:2", chord: 3, duration: 1 },
-          { time: "6:3", chord: 2, duration: 1 },
-          { time: "7:0", chord: 1, duration: 4 },
-        ]
-      );
+      let part = new Tone.Part((time, val) => {
+        if (!Array.isArray(val.chord)) {
+          val.chord = [val.chord];
+        }
+        for (let note of val.chord) {
+          synth.triggerAttackRelease(
+            this.to_key(note),
+            this.to_div(val.duration)
+          );
+          this.key_data[this.to_half_steps(note) + this.keynum] = 1;
+          setTimeout(() => {
+            this.key_data[this.to_half_steps(note) + this.keynum] = 0;
+          }, 800 * (60 / this.bpm) * val.duration);
+        }
+      }, this.music_data);
       Tone.Transport.bpm.value = this.bpm;
       part.start(Tone.now());
       Tone.Transport.start();
