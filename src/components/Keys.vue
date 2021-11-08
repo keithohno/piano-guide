@@ -1,4 +1,5 @@
 <template>
+  <BlackLetters :octaves="octaves" />
   <div id="keys">
     <div id="white-keys">
       <div
@@ -17,11 +18,16 @@
       ></div>
     </div>
   </div>
+  <WhiteLetters :octaves="octaves" />
 </template>
 
 <script>
+import WhiteLetters from "./WhiteLetters.vue";
+import BlackLetters from "./BlackLetters.vue";
+
 export default {
   name: "Keys",
+  components: { WhiteLetters, BlackLetters },
   props: { key_data: Array, octaves: Number },
   computed: {
     wkey_nums() {
@@ -58,6 +64,9 @@ export default {
 </script>
 
 <style scoped>
+#keys {
+  height: 180px;
+}
 #white-keys {
   position: absolute;
   display: flex;
