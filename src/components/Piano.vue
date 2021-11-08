@@ -1,8 +1,9 @@
 <template>
   <h1>Piano :)</h1>
-  <BlackLetters :octaves="2" @selectkey="play_key" />
+  <button @click="play" v-if="!interactive">CLICK</button>
+  <BlackLetters :octaves="2" v-if="interactive" @selectkey="play_key" />
   <Keys :key_data="key_data" :octaves="2" />
-  <WhiteLetters :octaves="2" @selectkey="play_key" />
+  <WhiteLetters :octaves="2" v-if="interactive" @selectkey="play_key" />
 </template>
 
 <script>
