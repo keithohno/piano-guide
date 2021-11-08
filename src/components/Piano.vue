@@ -1,30 +1,44 @@
 <template>
   <h1>Piano :)</h1>
-  <button @click="play">CLICK</button>
+  <BlackLetters :octaves="2" @selectkey="play_key" />
   <Keys :key_data="key_data" :octaves="2" />
+  <WhiteLetters :octaves="2" @selectkey="play_key" />
 </template>
 
 <script>
 import * as Tone from "tone";
 import Keys from "./Keys.vue";
+import WhiteLetters from "./WhiteLetters.vue";
+import BlackLetters from "./BlackLetters.vue";
 
 export default {
   name: "Piano",
   components: {
     Keys,
+    WhiteLetters,
+    BlackLetters,
   },
   props: {
     bpm: Number,
-    key_: Number,
+    interactive: Boolean,
+    key_preset: Number,
   },
   data: function () {
     return {
       key_data: Array(25).fill(0),
+      key_input: 0,
     };
   },
   computed: {
     keyhz() {
-      return 130.82 * Math.pow(1.0594631, this.key_);
+      return 130.82 * Math.pow(1.0594631, this.keynum);
+    },
+    keynum() {
+      if (this.interactive) {
+        return this.key_input;
+      } else {
+        return this.key_preset;
+      }
     },
   },
   methods: {
@@ -51,6 +65,7 @@ export default {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
+      this.key_data = Array(25).fill(0);
       let synth = new Tone.PolySynth().toDestination();
       Tone.Transport.cancel(0);
 
@@ -64,9 +79,9 @@ export default {
               this.to_key(note),
               this.to_div(val.duration)
             );
-            this.key_data[this.to_half_steps(note) + this.key_] = 1;
+            this.key_data[this.to_half_steps(note) + this.keynum] = 1;
             setTimeout(() => {
-              this.key_data[this.to_half_steps(note) + this.key_] = 0;
+              this.key_data[this.to_half_steps(note) + this.keynum] = 0;
             }, 800 * (60 / this.bpm) * val.duration);
           }
         },
@@ -102,6 +117,10 @@ export default {
       Tone.Transport.bpm.value = this.bpm;
       part.start(Tone.now());
       Tone.Transport.start();
+    },
+    play_key(key) {
+      this.key_input = key;
+      this.play();
     },
   },
 };

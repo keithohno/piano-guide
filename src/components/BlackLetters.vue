@@ -1,12 +1,13 @@
 <template>
   <div id="black-letters">
     <div
-      v-for="(letter, i) in keynames"
+      v-for="(note, i) in keynames"
       :key="i"
-      :class="{ invis: letter == '0' }"
+      :class="{ invis: note == 0 }"
       class="letter-div"
+      @click="$emit('selectkey', note[1])"
     >
-      {{ letter }}
+      {{ note[0] }}
     </div>
   </div>
 </template>
@@ -21,13 +22,13 @@ export default {
     keynames() {
       let letters = [];
       for (let i = 0; i < this.octaves; i++) {
-        letters.push("C#\nB♭");
-        letters.push("D#\nE♭");
-        letters.push("0");
-        letters.push("F#\nG♭");
-        letters.push("G#\nA♭");
-        letters.push("A#\nB♭");
-        letters.push("0");
+        letters.push(["C#\nB♭", 1]);
+        letters.push(["D#\nE♭", 3]);
+        letters.push(0);
+        letters.push(["F#\nG♭", 6]);
+        letters.push(["G#\nA♭", 8]);
+        letters.push(["A#\nB♭", 10]);
+        letters.push(0);
       }
       letters.pop();
       return letters;
