@@ -1,7 +1,7 @@
 <template>
   <h1>Piano :)</h1>
   <button @click="play">CLICK</button>
-  <Keys :key_data="key_data" />
+  <Keys :key_data="key_data" :octaves="2" />
 </template>
 
 <script>
