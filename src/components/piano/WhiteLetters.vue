@@ -1,5 +1,5 @@
 <template>
-  <div id="white-letters" :class="{ labeled: labels, unlabeled: !labels }">
+  <div class="white-letters" :class="{ labeled: labels, unlabeled: !labels }">
     <div
       v-for="(note, i) in keynames"
       :key="i"
@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped>
-#white-letters {
+.white-letters {
   position: absolute;
   display: flex;
   flex-direction: row;

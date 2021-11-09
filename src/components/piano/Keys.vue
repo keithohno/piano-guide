@@ -1,6 +1,6 @@
 <template>
-  <div id="keys" :class="{ labeled: labels, unlabeled: !labels }">
-    <div id="white-keys">
+  <div class="keys" :class="{ labeled: labels, unlabeled: !labels }">
+    <div class="white-keys">
       <div
         v-for="keynum in wkey_nums"
         :key="keynum"
@@ -8,7 +8,7 @@
         :class="{ pressed: key_data[keynum] }"
       ></div>
     </div>
-    <div id="black-keys">
+    <div class="black-keys">
       <div
         v-for="keynum in bkey_nums"
         :key="keynum"
@@ -57,20 +57,20 @@ export default {
 </script>
 
 <style scoped>
-#keys {
+.keys {
   position: absolute;
   height: 180px;
 }
 .labeled {
   margin-top: 50px;
 }
-#white-keys,
-#black-keys {
+.white-keys,
+.black-keys {
   position: absolute;
   display: flex;
   flex-direction: row;
 }
-#black-keys {
+.black-keys {
   margin-left: 18px;
   z-index: 2;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div id="black-letters" :class="{ labeled: labels, unlabeled: !labels }">
+  <div class="black-letters" :class="{ labeled: labels, unlabeled: !labels }">
     <div
       v-for="(note, i) in keynames"
       :key="i"
@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style scoped>
-#black-letters {
+.black-letters {
   position: absolute;
   margin-left: 18px;
   display: flex;
