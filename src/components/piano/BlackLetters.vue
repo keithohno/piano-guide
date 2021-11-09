@@ -7,7 +7,9 @@
       class="letter-div"
       @click="$emit('selectkey', note[1])"
     >
-      {{ note[0] }}
+      <span>
+        {{ note[0] }}
+      </span>
     </div>
   </div>
 </template>
@@ -39,28 +41,35 @@ export default {
 
 <style scoped>
 #black-letters {
-  margin-left: 16px;
+  position: absolute;
+  margin-left: 18px;
   display: flex;
   flex-direction: row;
+  z-index: 3;
 }
 .letter-div {
-  margin-left: 11px;
-  margin-right: 10px;
-  width: 36px;
-  height: 50px;
+  box-sizing: border-box;
+  margin-left: 10px;
+  margin-right: 9px;
+  width: 38px;
+  height: 150px;
   display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+}
+.letter-div span {
   text-align: center;
   font-size: 20px;
+  height: 50px;
+  width: 100%;
+}
+.letter-div:hover span {
+  background-color: #e0ffe0;
 }
 .letter-div:hover {
-  background-color: #bfb;
+  background-color: #363;
   cursor: pointer;
 }
 .invis {
-  width: 12px;
+  width: 14px;
   visibility: hidden;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="keys">
+  <div id="keys" :class="{ shifted: labels }">
     <div id="white-keys">
       <div
         v-for="keynum in wkey_nums"
@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "Keys",
-  props: { key_data: Array, octaves: Number },
+  props: { key_data: Array, octaves: Number, labels: Boolean },
   computed: {
     wkey_nums() {
       let nums = [];
@@ -58,24 +58,27 @@ export default {
 
 <style scoped>
 #keys {
+  position: absolute;
   height: 180px;
 }
-#white-keys {
+.shifted {
+  margin-top: 50px;
+}
+#white-keys,
+#black-keys {
   position: absolute;
   display: flex;
   flex-direction: row;
+}
+#black-keys {
+  margin-left: 18px;
+  z-index: 2;
 }
 .white-key {
   box-sizing: border-box;
   width: 50px;
   height: 180px;
   border: 3px solid black;
-}
-#black-keys {
-  position: absolute;
-  left: 25px;
-  display: flex;
-  flex-direction: row;
 }
 .black-key {
   box-sizing: border-box;

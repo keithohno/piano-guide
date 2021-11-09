@@ -1,9 +1,10 @@
 <template>
-  <h1>Piano :)</h1>
-  <button @click="play" v-if="!interactive">CLICK</button>
-  <BlackLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
-  <Keys :key_data="key_data" :octaves="octaves" />
-  <WhiteLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
+  <div id="piano">
+    <button @click="play" v-if="!interactive" class="play-button">▶</button>
+    <BlackLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
+    <Keys :key_data="key_data" :octaves="octaves" :labels="interactive" />
+    <WhiteLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
+  </div>
 </template>
 
 <script>
@@ -105,3 +106,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.play-button {
+  font-size: 20px;
+}
+#piano {
+  height: 280px;
+}
+</style>
