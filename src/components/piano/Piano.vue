@@ -1,19 +1,21 @@
 <template>
-  <button @click="play" v-if="!interactive" class="play-button">▶</button>
-  <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
-    <BlackLetters
-      :octaves="octaves"
-      v-if="interactive"
-      :labels="labels"
-      @selectkey="play_key"
-    />
-    <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
-    <WhiteLetters
-      :octaves="octaves"
-      v-if="interactive"
-      :labels="labels"
-      @selectkey="play_key"
-    />
+  <div class="piano-container">
+    <button @click="play" v-if="!interactive" class="play-button">▶</button>
+    <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
+      <BlackLetters
+        :octaves="octaves"
+        v-if="interactive"
+        :labels="labels"
+        @selectkey="play_key"
+      />
+      <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
+      <WhiteLetters
+        :octaves="octaves"
+        v-if="interactive"
+        :labels="labels"
+        @selectkey="play_key"
+      />
+    </div>
   </div>
 </template>
 
@@ -136,5 +138,9 @@ export default {
 }
 .p-unlabeled {
   height: 180px;
+}
+.piano-container {
+  zoom: 0.7;
+  -moz-transform: scale(0.7);
 }
 </style>
