@@ -1,5 +1,8 @@
 <template>
-  <div class="white-letters" :class="{ labeled: labels, unlabeled: !labels }">
+  <div
+    class="white-letters"
+    :class="{ 'wk-labeled': labels, 'wk-unlabeled': !labels }"
+  >
     <div
       v-for="(note, i) in keynames"
       :key="i"
@@ -46,11 +49,11 @@ export default {
   flex-direction: row;
   z-index: 1;
 }
-.labeled {
+.wk-labeled {
   margin-top: 50px;
   height: 230px;
 }
-.unlabeled {
+.wk-unlabeled {
   height: 180px;
 }
 .letter-div {

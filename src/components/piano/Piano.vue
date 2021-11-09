@@ -1,6 +1,6 @@
 <template>
-  <div id="piano" :class="{ labeled: labels, unlabeled: !labels }">
-    <button @click="play" v-if="!interactive" class="play-button">▶</button>
+  <button @click="play" v-if="!interactive" class="play-button">▶</button>
+  <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
     <BlackLetters
       :octaves="octaves"
       v-if="interactive"
@@ -31,12 +31,13 @@ export default {
     BlackLetters,
   },
   props: {
+    id: String,
     bpm: { type: Number, default: 120 },
-    interactive: { type: Boolean, default: true },
-    labels: { type: Boolean, default: true },
+    interactive: { type: Boolean, default: false },
+    labels: { type: Boolean, default: false },
     key_preset: { type: Number, default: 0 },
     music_data: Array,
-    scale_locked: { type: Boolean, default: true },
+    scale_locked: { type: Boolean, default: false },
     octaves: { type: Number, default: 2 },
   },
   data: function () {
@@ -76,10 +77,7 @@ export default {
         return scale_num * 2 - 3;
       }
     },
-    to_key(note) {
-      if (this.scale_locked) {
-        note = this.to_half_steps(note);
-      }
+    to_hz(note) {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
@@ -92,13 +90,24 @@ export default {
           val.chord = [val.chord];
         }
         for (let note of val.chord) {
+          // octave modifier
+          if (Array.isArray(note)) {
+            if (this.scale_locked) {
+              note = this.to_half_steps(note[0]) + 12 * note[1];
+            } else {
+              note = note[0] + 12 * note[1];
+            }
+          } else {
+            if (this.scale_locked) {
+              note = this.to_half_steps(note);
+            }
+          }
+          // sound
           synth.triggerAttackRelease(
-            this.to_key(note),
+            this.to_hz(note),
             this.to_div(val.duration)
           );
-          if (this.scale_locked) {
-            note = this.to_half_steps(note);
-          }
+          // key graphics
           this.key_data[note + this.keynum] = 1;
           setTimeout(() => {
             this.key_data[note + this.keynum] = 0;
@@ -118,14 +127,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .play-button {
   font-size: 20px;
 }
-.labeled {
+.p-labeled {
   height: 280px;
 }
-.unlabeled {
+.p-unlabeled {
   height: 180px;
 }
 </style>
