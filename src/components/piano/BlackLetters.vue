@@ -39,14 +39,14 @@ export default {
 
 <style scoped>
 #black-letters {
-  margin-left: 24px;
+  margin-left: 16px;
   display: flex;
   flex-direction: row;
 }
 .letter-div {
-  margin-left: 6px;
-  margin-right: 6px;
-  width: 38px;
+  margin-left: 11px;
+  margin-right: 10px;
+  width: 36px;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -60,6 +60,7 @@ export default {
   cursor: pointer;
 }
 .invis {
+  width: 12px;
   visibility: hidden;
 }
 </style>

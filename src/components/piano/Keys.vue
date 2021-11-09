@@ -73,20 +73,21 @@ export default {
 }
 #black-keys {
   position: absolute;
-  left: 32px;
+  left: 25px;
   display: flex;
   flex-direction: row;
 }
 .black-key {
   box-sizing: border-box;
-  margin-left: 7px;
-  margin-right: 7px;
+  margin-left: 11px;
+  margin-right: 10px;
   width: 36px;
   height: 100px;
   background-color: black;
   border: 3px solid black;
 }
 .invis {
+  width: 11.7px;
   visibility: hidden;
 }
 .pressed {
