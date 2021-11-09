@@ -1,9 +1,9 @@
 <template>
   <h1>Piano :)</h1>
   <button @click="play" v-if="!interactive">CLICK</button>
-  <BlackLetters :octaves="2" v-if="interactive" @selectkey="play_key" />
-  <Keys :key_data="key_data" :octaves="2" />
-  <WhiteLetters :octaves="2" v-if="interactive" @selectkey="play_key" />
+  <BlackLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
+  <Keys :key_data="key_data" :octaves="octaves" />
+  <WhiteLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
 </template>
 
 <script>
@@ -20,14 +20,16 @@ export default {
     BlackLetters,
   },
   props: {
-    bpm: Number,
-    interactive: Boolean,
-    key_preset: Number,
+    bpm: { type: Number, default: 120 },
+    interactive: { type: Boolean, default: true },
+    key_preset: { type: Number, default: 0 },
     music_data: Array,
+    scale_locked: { type: Boolean, default: true },
+    octaves: { type: Number, default: 2 },
   },
   data: function () {
     return {
-      key_data: Array(25).fill(0),
+      key_data: Array(12 * this.octaves + 1).fill(0),
       key_input: 0,
     };
   },
@@ -63,11 +65,13 @@ export default {
       }
     },
     to_key(note) {
-      note = this.to_half_steps(note);
+      if (this.scale_locked) {
+        note = this.to_half_steps(note);
+      }
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
-      this.key_data = Array(25).fill(0);
+      this.key_data = Array(12 * this.octaves + 1).fill(0);
       let synth = new Tone.PolySynth().toDestination();
       Tone.Transport.cancel(0);
 
@@ -80,12 +84,16 @@ export default {
             this.to_key(note),
             this.to_div(val.duration)
           );
-          this.key_data[this.to_half_steps(note) + this.keynum] = 1;
+          if (this.scale_locked) {
+            note = this.to_half_steps(note);
+          }
+          this.key_data[note + this.keynum] = 1;
           setTimeout(() => {
-            this.key_data[this.to_half_steps(note) + this.keynum] = 0;
+            this.key_data[note + this.keynum] = 0;
           }, 800 * (60 / this.bpm) * val.duration);
         }
       }, this.music_data);
+
       Tone.Transport.bpm.value = this.bpm;
       part.start(Tone.now());
       Tone.Transport.start();
