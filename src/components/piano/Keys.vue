@@ -1,5 +1,5 @@
 <template>
-  <div id="keys" :class="{ shifted: labels }">
+  <div id="keys" :class="{ labeled: labels, unlabeled: !labels }">
     <div id="white-keys">
       <div
         v-for="keynum in wkey_nums"
@@ -61,7 +61,7 @@ export default {
   position: absolute;
   height: 180px;
 }
-.shifted {
+.labeled {
   margin-top: 50px;
 }
 #white-keys,

@@ -1,9 +1,19 @@
 <template>
-  <div id="piano">
+  <div id="piano" :class="{ labeled: labels, unlabeled: !labels }">
     <button @click="play" v-if="!interactive" class="play-button">▶</button>
-    <BlackLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
-    <Keys :key_data="key_data" :octaves="octaves" :labels="interactive" />
-    <WhiteLetters :octaves="octaves" v-if="interactive" @selectkey="play_key" />
+    <BlackLetters
+      :octaves="octaves"
+      v-if="interactive"
+      :labels="labels"
+      @selectkey="play_key"
+    />
+    <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
+    <WhiteLetters
+      :octaves="octaves"
+      v-if="interactive"
+      :labels="labels"
+      @selectkey="play_key"
+    />
   </div>
 </template>
 
@@ -23,6 +33,7 @@ export default {
   props: {
     bpm: { type: Number, default: 120 },
     interactive: { type: Boolean, default: true },
+    labels: { type: Boolean, default: true },
     key_preset: { type: Number, default: 0 },
     music_data: Array,
     scale_locked: { type: Boolean, default: true },
@@ -107,11 +118,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .play-button {
   font-size: 20px;
 }
-#piano {
+.labeled {
   height: 280px;
+}
+.unlabeled {
+  height: 180px;
 }
 </style>

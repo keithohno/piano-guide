@@ -1,12 +1,12 @@
 <template>
-  <div id="white-letters">
+  <div id="white-letters" :class="{ labeled: labels, unlabeled: !labels }">
     <div
       v-for="(note, i) in keynames"
       :key="i"
       class="letter-div"
       @click="$emit('selectkey', note[1])"
     >
-      <span>
+      <span v-if="labels">
         {{ note[0] }}
       </span>
     </div>
@@ -18,6 +18,7 @@ export default {
   name: "WhiteLetters",
   props: {
     octaves: Number,
+    labels: Boolean,
   },
   computed: {
     keynames() {
@@ -41,14 +42,19 @@ export default {
 <style scoped>
 #white-letters {
   position: absolute;
-  margin-top: 50px;
   display: flex;
   flex-direction: row;
   z-index: 1;
 }
+.labeled {
+  margin-top: 50px;
+  height: 230px;
+}
+.unlabeled {
+  height: 180px;
+}
 .letter-div {
   width: 50px;
-  height: 230px;
   display: flex;
 }
 .letter-div span {

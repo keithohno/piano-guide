@@ -1,5 +1,5 @@
 <template>
-  <div id="black-letters">
+  <div id="black-letters" :class="{ labeled: labels, unlabeled: !labels }">
     <div
       v-for="(note, i) in keynames"
       :key="i"
@@ -7,7 +7,7 @@
       class="letter-div"
       @click="$emit('selectkey', note[1])"
     >
-      <span>
+      <span v-if="labels">
         {{ note[0] }}
       </span>
     </div>
@@ -19,6 +19,7 @@ export default {
   name: "BlackLetters",
   props: {
     octaves: Number,
+    labels: Boolean,
   },
   computed: {
     keynames() {
@@ -47,12 +48,17 @@ export default {
   flex-direction: row;
   z-index: 3;
 }
+.labeled {
+  height: 150px;
+}
+.unlabeled {
+  height: 100px;
+}
 .letter-div {
   box-sizing: border-box;
   margin-left: 10px;
   margin-right: 9px;
   width: 38px;
-  height: 150px;
   display: flex;
 }
 .letter-div span {
