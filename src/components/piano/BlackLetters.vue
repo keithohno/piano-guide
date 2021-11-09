@@ -49,7 +49,6 @@ export default {
   margin-left: 18px;
   display: flex;
   flex-direction: row;
-  z-index: 3;
 }
 .bk-labeled {
   height: 150px;
@@ -63,6 +62,7 @@ export default {
   margin-right: 9px;
   width: 38px;
   display: flex;
+  z-index: 3;
 }
 .letter-div span {
   text-align: center;
@@ -80,5 +80,6 @@ export default {
 .invis {
   width: 14px;
   visibility: hidden;
+  z-index: 0 !important;
 }
 </style>

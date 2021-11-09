@@ -72,7 +72,6 @@ export default {
 }
 .black-keys {
   margin-left: 18px;
-  z-index: 2;
 }
 .white-key {
   box-sizing: border-box;
@@ -88,10 +87,12 @@ export default {
   height: 100px;
   background-color: black;
   border: 3px solid black;
+  z-index: 2;
 }
 .invis {
   width: 11.7px;
   visibility: hidden;
+  z-index: 0 !important;
 }
 .pressed {
   background-color: #77aa88 !important;

@@ -47,7 +47,6 @@ export default {
   position: absolute;
   display: flex;
   flex-direction: row;
-  z-index: 1;
 }
 .wk-labeled {
   margin-top: 50px;
@@ -59,6 +58,7 @@ export default {
 .letter-div {
   width: 50px;
   display: flex;
+  z-index: 1;
 }
 .letter-div span {
   box-sizing: border-box;
