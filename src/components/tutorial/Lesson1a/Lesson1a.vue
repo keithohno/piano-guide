@@ -65,7 +65,6 @@
       :octaves="1"
       :scale_locked="true"
       :music_data="scale_data"
-      id="lesson1a-piano"
     />
     <div class="l1a-letters">
       <div class="l1a-letter-div">C</div>
