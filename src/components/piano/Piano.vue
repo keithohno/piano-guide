@@ -68,8 +68,16 @@ export default {
           return "4n";
         case 2:
           return "2n";
+        case 3:
+          return "2n.";
         case 4:
           return "1n";
+        case 0.67:
+          return "4t";
+        case 1.33:
+          return "2t";
+        case 2.67:
+          return "1t";
       }
     },
     to_half_steps(scale_num) {
