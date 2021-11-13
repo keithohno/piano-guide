@@ -7,6 +7,7 @@
         v-if="interactive"
         :labels="labels"
         @selectkey="play_key"
+        :play_state="play_state"
       />
       <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
       <WhiteLetters
@@ -14,6 +15,7 @@
         v-if="interactive"
         :labels="labels"
         @selectkey="play_key"
+        :play_state="play_state"
       />
     </div>
   </div>
@@ -46,6 +48,7 @@ export default {
     return {
       key_data: Array(12 * this.octaves + 1).fill(0),
       key_input: 0,
+      play_state: false,
     };
   },
   computed: {
@@ -91,6 +94,10 @@ export default {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
+      if (this.play_state) {
+        return;
+      }
+
       this.key_data = Array(12 * this.octaves + 1).fill(0);
       let synth = new Tone.PolySynth().toDestination();
       Tone.Transport.cancel(0);
@@ -128,8 +135,19 @@ export default {
       Tone.Transport.bpm.value = this.bpm;
       part.start(Tone.now());
       Tone.Transport.start();
+
+      let measures = parseInt(
+        this.music_data[this.music_data.length - 1].time.split(":")[0]
+      );
+      this.play_state = true;
+      setTimeout(() => {
+        this.play_state = false;
+      }, 1000 * (measures + 1) * 4 * (60 / this.bpm));
     },
     play_key(key) {
+      if (this.play_state) {
+        return;
+      }
       this.key_input = key;
       this.play();
     },

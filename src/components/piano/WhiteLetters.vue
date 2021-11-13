@@ -7,6 +7,7 @@
       v-for="(note, i) in keynames"
       :key="i"
       class="letter-div"
+      :class="{ clickable: !play_state }"
       @click="$emit('selectkey', note[1])"
     >
       <span v-if="labels">
@@ -22,6 +23,7 @@ export default {
   props: {
     octaves: Number,
     labels: Boolean,
+    play_state: Boolean,
   },
   computed: {
     keynames() {
@@ -69,11 +71,11 @@ export default {
   width: 100%;
   padding: 20%;
 }
-.letter-div:hover {
+.clickable:hover {
   background-color: #ada;
   cursor: pointer;
 }
-.letter-div:hover span {
+.clickable:hover span {
   background-color: #e0ffe0;
 }
 </style>
