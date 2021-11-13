@@ -1,6 +1,9 @@
 <template>
   <div class="piano-container">
-    <button @click="play" v-if="!interactive" class="play-button">▶</button>
+    <p>
+      {{ title }}
+      <button @click="play" v-if="!interactive" class="play-button">▶</button>
+    </p>
     <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
       <BlackLetters
         :octaves="octaves"
@@ -36,6 +39,7 @@ export default {
   },
   props: {
     id: String,
+    title: String,
     bpm: { type: Number, default: 120 },
     interactive: { type: Boolean, default: false },
     labels: { type: Boolean, default: false },

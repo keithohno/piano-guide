@@ -6,7 +6,11 @@
       notice that the same pattern of twelve keys repeats multiple times on a
       piano, from deep and low to high ringing notes.
     </p>
-    <Piano :octaves="3" :music_data="this.chromatic_data" />
+    <Piano
+      title="12 Part Interval of Notes"
+      :octaves="3"
+      :music_data="this.chromatic_data"
+    />
     <p>
       The space between any two consecutive notes is called a half-step.
       Combining two half-steps (skipping the note between) produces a
@@ -14,6 +18,7 @@
     </p>
     <p>Half steps:</p>
     <Piano
+      title="Half Step Demo"
       :octaves="1"
       :interactive="true"
       :music_data="[
@@ -23,6 +28,7 @@
     />
     <p>Whole steps:</p>
     <Piano
+      title="Whole Step Demo"
       :octaves="1"
       :interactive="true"
       :music_data="[
@@ -35,6 +41,7 @@
       notes that form an octave sound similar:
     </p>
     <Piano
+      title="Octave Demo"
       :octaves="2"
       :interactive="true"
       :music_data="[
@@ -49,6 +56,7 @@
       pattern of steps.
     </p>
     <Piano
+      title="Scale Demo"
       :octaves="2"
       :interactive="true"
       :scale_locked="true"
@@ -62,6 +70,7 @@
       from A to G. We use these letters to describe the notes they represent.
     </p>
     <Piano
+      title="C Major Scale"
       :octaves="1"
       :scale_locked="true"
       :music_data="scale_data"
@@ -99,6 +108,8 @@ export default {
 .l1a-letters {
   display: flex;
   flex-direction: row;
+  zoom: 0.7;
+  -moz-transform: scale(0.7);
 }
 .l1a-letter-div {
   box-sizing: border-box;
@@ -107,12 +118,5 @@ export default {
   font-size: 20px;
   text-align: center;
   padding: 15px;
-}
-.lesson-container {
-  position: absolute;
-  font-size: 24px;
-  flex-direction: column;
-  width: 80%;
-  left: 10%;
 }
 </style>

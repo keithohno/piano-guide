@@ -7,9 +7,20 @@
       white keys of the piano. This is due to something called the 'key' of a
       piece, which you will learn about in level 2!
     </p>
-    <Piano :octaves="1" :scale_locked="true" :music_data="mary_data" />
-    <Piano :octaves="1" :scale_locked="true" :music_data="twinkle_data" />
     <Piano
+      title="Mary had a Little Lamb"
+      :octaves="1"
+      :scale_locked="true"
+      :music_data="mary_data"
+    />
+    <Piano
+      title="Twinkle Twinkle Little Star"
+      :octaves="1"
+      :scale_locked="true"
+      :music_data="twinkle_data"
+    />
+    <Piano
+      title="Itsy Bitsy Spider"
       :octaves="2"
       :scale_locked="true"
       :music_data="itsy_data"
@@ -45,13 +56,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.lesson-container {
-  position: absolute;
-  font-size: 24px;
-  flex-direction: column;
-  width: 80%;
-  left: 10%;
-}
-</style>
