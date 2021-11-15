@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Lesson1a from "./components/tutorial/Lesson1a/Lesson1a.vue";
-import Lesson1b from "./components/tutorial/Lesson1b/Lesson1b.vue";
+import Lesson1a from "./components/tutorial/Lesson1a.vue";
+import Lesson1b from "./components/tutorial/Lesson1b.vue";
+import Lesson2a from "./components/tutorial/Lesson2a.vue";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: "/1b",
     component: Lesson1b,
+  },
+  {
+    path: "/2a",
+    component: Lesson2a,
   },
 ];
 const router = createRouter({

@@ -12,9 +12,9 @@
       :music_data="this.chromatic_data"
     />
     <p>
-      The space between any two consecutive notes is called a half-step.
-      Combining two half-steps (skipping the note between) produces a
-      whole-step.
+      The space between any two consecutive notes is called a
+      <strong>half-step</strong>. Combining two half-steps (skipping the note
+      between) produces a <strong>whole-step</strong>.
     </p>
     <p>Half steps:</p>
     <Piano
@@ -37,8 +37,8 @@
       ]"
     />
     <p>
-      Putting twelve spaces together gives us an octave. Notice how the two
-      notes that form an octave sound similar:
+      Putting twelve spaces together gives us an <strong>octave</strong>. Notice
+      how the two notes that form an octave sound similar:
     </p>
     <Piano
       title="Octave Demo"
@@ -51,9 +51,9 @@
       ]"
     />
     <p>
-      A scale is a collection of eight 'increasing' notes, whose start and end
-      form an octave. They follow a 'whole whole half whole whole whole half'
-      pattern of steps.
+      A <strong>scale</strong> is a collection of eight 'increasing' notes,
+      whose start and end form an octave. They follow a 'whole whole half whole
+      whole whole half' pattern of steps.
     </p>
     <Piano
       title="Scale Demo"
@@ -89,9 +89,9 @@
 </template>
 
 <script>
-import Piano from "../../piano/Piano.vue";
-import chromatic from "./chromatic_data.js";
-import scale from "./scale_data.js";
+import Piano from "../piano/Piano.vue";
+import chromatic from "./music/chromatic_data.js";
+import scale from "./music/scale_data.js";
 
 export default {
   name: "Lesson1a",

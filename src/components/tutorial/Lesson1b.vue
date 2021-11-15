@@ -37,10 +37,10 @@
 </template>
 
 <script>
-import Piano from "../../piano/Piano.vue";
-import mary from "./mary_data.js";
-import twinkle from "./twinkle_data.js";
-import itsy from "./itsy_data.js";
+import Piano from "../piano/Piano.vue";
+import mary from "./music/mary_data.js";
+import twinkle from "./music/twinkle_data.js";
+import itsy from "./music/itsy_data.js";
 
 export default {
   name: "Lesson1b",
