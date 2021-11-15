@@ -7,16 +7,18 @@
     <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
       <BlackLetters
         :octaves="octaves"
-        v-if="interactive"
+        v-if="interactive || labels"
         :labels="labels"
+        :interactive="interactive"
         @selectkey="play_key"
         :play_state="play_state"
       />
       <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
       <WhiteLetters
         :octaves="octaves"
-        v-if="interactive"
+        v-if="interactive || labels"
         :labels="labels"
+        :interactive="interactive"
         @selectkey="play_key"
         :play_state="play_state"
       />

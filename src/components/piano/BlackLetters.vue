@@ -6,9 +6,9 @@
     <div
       v-for="(note, i) in keynames"
       :key="i"
-      :class="{ invis: note == 0, clickable: !this.play_state }"
+      :class="{ invis: note == 0, clickable: !this.play_state && interactive }"
       class="letter-div"
-      @click="$emit('selectkey', note[1])"
+      @click="handle_click(note[1])"
     >
       <span v-if="labels">
         {{ note[0] }}
@@ -23,6 +23,7 @@ export default {
   props: {
     octaves: Number,
     labels: Boolean,
+    interactive: Boolean,
     play_state: Boolean,
   },
   computed: {
@@ -39,6 +40,13 @@ export default {
       }
       letters.pop();
       return letters;
+    },
+  },
+  methods: {
+    handle_click(note) {
+      if (this.interactive) {
+        this.$emit("selectkey", note);
+      }
     },
   },
 };
