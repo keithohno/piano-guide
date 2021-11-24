@@ -1,11 +1,14 @@
 <template>
-  <div class="keys" :class="{ labeled: labels, unlabeled: !labels }">
+  <div
+    class="keys"
+    :class="{ labeled: pparams.labeled, unlabeled: !pparams.labeled }"
+  >
     <div class="white-keys">
       <div
         v-for="keynum in wkey_nums"
         :key="keynum"
         class="white-key"
-        :class="{ pressed: key_data[keynum] }"
+        :class="{ pressed: pstate.key_data[keynum] }"
       ></div>
     </div>
     <div class="black-keys">
@@ -13,7 +16,7 @@
         v-for="keynum in bkey_nums"
         :key="keynum"
         class="black-key"
-        :class="{ pressed: key_data[keynum], invis: keynum == -1 }"
+        :class="{ pressed: pstate.key_data[keynum], invis: keynum == -1 }"
       ></div>
     </div>
   </div>
@@ -22,11 +25,11 @@
 <script>
 export default {
   name: "Keys",
-  props: { key_data: Array, octaves: Number, labels: Boolean },
+  props: { pparams: Object, pstate: Object },
   computed: {
     wkey_nums() {
       let nums = [];
-      for (let i = 0; i < this.octaves; i++) {
+      for (let i = 0; i < this.pparams.octaves; i++) {
         nums.push(12 * i);
         nums.push(12 * i + 2);
         nums.push(12 * i + 4);
@@ -35,12 +38,12 @@ export default {
         nums.push(12 * i + 9);
         nums.push(12 * i + 11);
       }
-      nums.push(this.octaves * 12);
+      nums.push(this.pparams.octaves * 12);
       return nums;
     },
     bkey_nums() {
       let nums = [];
-      for (let i = 0; i < this.octaves; i++) {
+      for (let i = 0; i < this.pparams.octaves; i++) {
         nums.push(12 * i + 1);
         nums.push(12 * i + 3);
         nums.push(-1);
@@ -62,7 +65,7 @@ export default {
   height: 180px;
 }
 .labeled {
-  margin-top: 50px;
+  margin-top: 54px;
 }
 .white-keys,
 .black-keys {

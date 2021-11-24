@@ -5,7 +5,7 @@
       construct and learn simple melodies! Here are a few songs that you can
       play: !note! everything in this section has been adjusted to use only the
       white keys of the piano. This is due to something called the 'key' of a
-      piece, which you will learn about in level 2!
+      piece, which you will learn about later in this guide!
     </p>
     <Piano
       title="Mary had a Little Lamb"
@@ -30,8 +30,7 @@
       At this stage, the most important thing is to practice, practice,
       practice. As you learn to associate melodies with notes on the piano, your
       brain will gradually build connections that help develop your sense of
-      'relative pitch.' This may take months or years to master, but the more
-      you practice, the easier it will be to pick up new songs.
+      'relative pitch.'
     </p>
   </div>
 </template>

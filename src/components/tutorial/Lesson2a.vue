@@ -17,7 +17,7 @@
     <Piano
       :octaves="1"
       :interactive="false"
-      :labels="true"
+      :labeled="true"
       :music_data="chromatic_data"
     />
     <p>
@@ -42,7 +42,8 @@
       :octaves="2"
       :scale_locked="true"
       :interactive="true"
-      :labels="true"
+      :labeled="true"
+      :max_interactive="12"
       :music_data="twinkle_data"
     />
     <p>The key of a piece has a couple practical implications:</p>

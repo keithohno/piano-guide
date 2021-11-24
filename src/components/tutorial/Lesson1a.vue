@@ -9,6 +9,7 @@
     <Piano
       title="12 Part Interval of Notes"
       :octaves="3"
+      :key_preset="12"
       :music_data="this.chromatic_data"
     />
     <p>
@@ -21,6 +22,7 @@
       title="Half Step Demo"
       :octaves="1"
       :interactive="true"
+      :max_interactive="11"
       :music_data="[
         { time: '0:1', chord: 0, duration: 1 },
         { time: '0:2', chord: 1, duration: 1 },
@@ -31,6 +33,7 @@
       title="Whole Step Demo"
       :octaves="1"
       :interactive="true"
+      :max_interactive="10"
       :music_data="[
         { time: '0:1', chord: 0, duration: 1 },
         { time: '0:2', chord: 2, duration: 1 },
@@ -44,6 +47,7 @@
       title="Octave Demo"
       :octaves="2"
       :interactive="true"
+      :max_interactive="12"
       :music_data="[
         { time: '0:1', chord: 0, duration: 1 },
         { time: '0:2', chord: 12, duration: 1 },
@@ -59,6 +63,7 @@
       title="Scale Demo"
       :octaves="2"
       :interactive="true"
+      :max_interactive="12"
       :scale_locked="true"
       :music_data="scale_data"
     />

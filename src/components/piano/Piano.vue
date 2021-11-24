@@ -4,23 +4,19 @@
       {{ title }}
       <button @click="play" v-if="!interactive" class="play-button">▶</button>
     </p>
-    <div :class="{ 'p-labeled': labels, 'p-unlabeled': !labels }">
+    <div :class="{ 'p-labeled': labeled, 'p-unlabeled': !labeled }">
       <BlackLetters
-        :octaves="octaves"
-        v-if="interactive || labels"
-        :labels="labels"
-        :interactive="interactive"
+        v-if="interactive || labeled"
         @selectkey="play_key"
-        :play_state="play_state"
+        :pparams="pparams"
+        :pstate="pstate"
       />
-      <Keys :key_data="key_data" :octaves="octaves" :labels="labels" />
+      <Keys :pparams="pparams" :pstate="pstate" />
       <WhiteLetters
-        :octaves="octaves"
-        v-if="interactive || labels"
-        :labels="labels"
-        :interactive="interactive"
+        v-if="interactive || labeled"
         @selectkey="play_key"
-        :play_state="play_state"
+        :pparams="pparams"
+        :pstate="pstate"
       />
     </div>
   </div>
@@ -43,12 +39,19 @@ export default {
     id: String,
     title: String,
     bpm: { type: Number, default: 120 },
-    interactive: { type: Boolean, default: false },
-    labels: { type: Boolean, default: false },
-    key_preset: { type: Number, default: 0 },
-    music_data: Array,
-    scale_locked: { type: Boolean, default: false },
     octaves: { type: Number, default: 2 },
+    interactive: { type: Boolean, default: false },
+    min_interactive: { type: Number, default: 0 },
+    max_interactive: { type: Number, default: 100 },
+    labeled: { type: Boolean, default: false },
+    key_preset: { type: Number, default: 0 },
+    scale_locked: { type: Boolean, default: false },
+    music_data: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
   },
   data: function () {
     return {
@@ -67,6 +70,21 @@ export default {
       } else {
         return this.key_preset;
       }
+    },
+    pparams() {
+      return {
+        octaves: this.octaves,
+        labeled: this.labeled,
+        interactive: this.interactive,
+        min_interactive: this.min_interactive,
+        max_interactive: this.max_interactive,
+      };
+    },
+    pstate() {
+      return {
+        play_state: this.play_state,
+        key_data: this.key_data,
+      };
     },
   },
   methods: {

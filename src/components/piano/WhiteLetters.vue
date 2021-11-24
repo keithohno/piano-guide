@@ -1,16 +1,27 @@
 <template>
   <div
     class="white-letters"
-    :class="{ 'wk-labeled': labels, 'wk-unlabeled': !labels }"
+    :class="{ 'wk-labeled': pparams.labeled, 'wk-unlabeled': !pparams.labeled }"
   >
     <div
       v-for="(note, i) in keynames"
       :key="i"
       class="letter-div"
-      :class="{ clickable: !play_state && interactive }"
+      :class="{
+        invis: note == 0,
+        'clickable-active':
+          pparams.interactive &&
+          note[1] <= pparams.max_interactive &&
+          note[1] >= pparams.min_interactive &&
+          !pstate.play_state,
+        clickable:
+          pparams.interactive &&
+          note[1] <= pparams.max_interactive &&
+          note[1] >= pparams.min_interactive,
+      }"
       @click="handle_click(note[1])"
     >
-      <span v-if="labels">
+      <span v-if="pparams.labeled">
         {{ note[0] }}
       </span>
     </div>
@@ -21,30 +32,32 @@
 export default {
   name: "WhiteLetters",
   props: {
-    octaves: Number,
-    labels: Boolean,
-    interactive: Boolean,
-    play_state: Boolean,
+    pparams: Object,
+    pstate: Object,
   },
   computed: {
     keynames() {
       let letters = [];
-      for (let i = 0; i < this.octaves; i++) {
-        letters.push(["C", 0]);
-        letters.push(["D", 2]);
-        letters.push(["E", 4]);
-        letters.push(["F", 5]);
-        letters.push(["G", 7]);
-        letters.push(["A", 9]);
-        letters.push(["B", 11]);
+      for (let i = 0; i < this.pparams.octaves; i++) {
+        letters.push(["C", 12 * i]);
+        letters.push(["D", 2 + 12 * i]);
+        letters.push(["E", 4 + 12 * i]);
+        letters.push(["F", 5 + 12 * i]);
+        letters.push(["G", 7 + 12 * i]);
+        letters.push(["A", 9 + 12 * i]);
+        letters.push(["B", 11 + 12 * i]);
       }
-      letters.push(["C", 0]);
+      letters.push(["C", 12 * this.pparams.octaves]);
       return letters;
     },
   },
   methods: {
     handle_click(note) {
-      if (this.interactive) {
+      if (
+        this.pparams.interactive &&
+        note <= this.pparams.max_interactive &&
+        note >= this.pparams.min_interactive
+      ) {
         this.$emit("selectkey", note);
       }
     },
@@ -60,10 +73,10 @@ export default {
 }
 .wk-labeled {
   margin-top: 50px;
-  height: 230px;
+  height: 234px;
 }
 .wk-unlabeled {
-  height: 180px;
+  height: 184px;
 }
 .letter-div {
   width: 50px;
@@ -79,11 +92,17 @@ export default {
   width: 100%;
   padding: 20%;
 }
-.clickable:hover {
+.clickable span {
+  border-bottom: 2px solid #585;
+  background-color: #eee;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+}
+.clickable-active:hover {
   background-color: #ada;
   cursor: pointer;
 }
-.clickable:hover span {
+.clickable-active:hover span {
   background-color: #e0ffe0;
 }
 </style>
