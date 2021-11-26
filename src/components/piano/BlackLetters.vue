@@ -17,6 +17,12 @@
           pparams.interactive &&
           note[1] <= pparams.max_interactive &&
           note[1] >= pparams.min_interactive,
+        'unclickable-active':
+          hovered &&
+          !pstate.play_state &&
+          pparams.interactive &&
+          (note[1] > pparams.max_interactive ||
+            note[1] < pparams.min_interactive),
       }"
       class="letter-div"
       @click="handle_click(note[1])"
@@ -24,6 +30,7 @@
       <span v-if="pparams.labeled">
         {{ note[0] }}
       </span>
+      <div></div>
     </div>
   </div>
 </template>
@@ -34,6 +41,7 @@ export default {
   props: {
     pparams: Object,
     pstate: Object,
+    hovered: Boolean,
   },
   computed: {
     keynames() {
@@ -78,13 +86,13 @@ export default {
 .bk-unlabeled {
   height: 100px;
 }
-
 .letter-div {
   box-sizing: border-box;
   margin-left: 10px;
   margin-right: 9px;
   width: 38px;
   display: flex;
+  flex-direction: column;
   z-index: 3;
 }
 .letter-div span {
@@ -92,11 +100,9 @@ export default {
   text-align: center;
   font-size: 20px;
   height: 54px;
-  width: 100%;
 }
-.clickable span {
-  border-top: 2px solid #585;
-  background-color: #eee;
+.letter-div div {
+  height: 100px;
 }
 .clickable-active:hover span {
   background-color: #e0ffe0;
@@ -104,6 +110,16 @@ export default {
 .clickable-active:hover {
   background-color: #363;
   cursor: pointer;
+}
+.unclickable-active div {
+  background: repeating-linear-gradient(
+    45deg,
+    black,
+    black 5px,
+    white 5px,
+    white 10px
+  );
+  opacity: 0.2;
 }
 .invis {
   width: 14px;

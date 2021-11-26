@@ -4,12 +4,17 @@
       {{ title }}
       <button @click="play" v-if="!interactive" class="play-button">▶</button>
     </p>
-    <div :class="{ 'p-labeled': labeled, 'p-unlabeled': !labeled }">
+    <div
+      :class="{ 'p-labeled': labeled, 'p-unlabeled': !labeled }"
+      @mouseover="this.hovered = true"
+      @mouseleave="this.hovered = false"
+    >
       <BlackLetters
         v-if="interactive || labeled"
         @selectkey="play_key"
         :pparams="pparams"
         :pstate="pstate"
+        :hovered="hovered"
       />
       <Keys :pparams="pparams" :pstate="pstate" />
       <WhiteLetters
@@ -17,6 +22,7 @@
         @selectkey="play_key"
         :pparams="pparams"
         :pstate="pstate"
+        :hovered="hovered"
       />
     </div>
   </div>
@@ -59,6 +65,7 @@ export default {
       key_data: Array(12 * this.octaves + 1).fill(0),
       key_input: 0,
       play_state: false,
+      hovered: false,
     };
   },
   computed: {

@@ -78,9 +78,10 @@ export default {
 }
 .white-key {
   box-sizing: border-box;
-  width: 50px;
+  width: 52px;
   height: 180px;
   border: 3px solid black;
+  margin-right: -2px;
 }
 .black-key {
   box-sizing: border-box;
