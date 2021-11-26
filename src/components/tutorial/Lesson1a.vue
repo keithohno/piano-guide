@@ -9,8 +9,10 @@
     <Piano
       title="12 Part Interval of Notes"
       :octaves="3"
-      :key_preset="12"
-      :music_data="this.chromatic_data"
+      :bpm="160"
+      :key_preset="0"
+      :base_octave="-1"
+      :music_data="this.chromatic_triple_data"
     />
     <p>
       The space between any two consecutive notes is called a
@@ -24,8 +26,8 @@
       :interactive="true"
       :max_interactive="11"
       :music_data="[
-        { time: '0:1', chord: 0, duration: 1 },
-        { time: '0:2', chord: 1, duration: 1 },
+        { time: '0:1', note: 0, duration: 1 },
+        { time: '0:2', note: 1, duration: 1 },
       ]"
     />
     <p>Whole steps:</p>
@@ -35,8 +37,8 @@
       :interactive="true"
       :max_interactive="10"
       :music_data="[
-        { time: '0:1', chord: 0, duration: 1 },
-        { time: '0:2', chord: 2, duration: 1 },
+        { time: '0:1', note: 0, duration: 1 },
+        { time: '0:2', note: 2, duration: 1 },
       ]"
     />
     <p>
@@ -49,9 +51,9 @@
       :interactive="true"
       :max_interactive="12"
       :music_data="[
-        { time: '0:1', chord: 0, duration: 1 },
-        { time: '0:2', chord: 12, duration: 1 },
-        { time: '1:0', chord: [0, 12], duration: 2 },
+        { time: '0:1', note: 0, duration: 1 },
+        { time: '0:2', note: 12, duration: 1 },
+        { time: '1:0', note: 0, octave: 1, duration: 2 },
       ]"
     />
     <p>
@@ -95,7 +97,7 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
-import chromatic from "./music/chromatic_data.js";
+import chromatic_triple from "./music/chromatic_data_triple.js";
 import scale from "./music/scale_data.js";
 
 export default {
@@ -104,7 +106,10 @@ export default {
     Piano,
   },
   data: function () {
-    return { chromatic_data: chromatic.data, scale_data: scale.data };
+    return {
+      chromatic_triple_data: chromatic_triple.data,
+      scale_data: scale.data,
+    };
   },
 };
 </script>

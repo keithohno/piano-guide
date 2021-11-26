@@ -22,6 +22,7 @@
     <Piano
       title="Itsy Bitsy Spider"
       :octaves="2"
+      :base_octave="-1"
       :scale_locked="true"
       :music_data="itsy_data"
       :bpm="180"

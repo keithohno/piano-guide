@@ -44,7 +44,7 @@
       :interactive="true"
       :labeled="true"
       :max_interactive="12"
-      :music_data="twinkle_data"
+      :music_data="twinkle_short"
     />
     <p>The key of a piece has a couple practical implications:</p>
     <p>
@@ -76,7 +76,7 @@
 <script>
 import Piano from "../piano/Piano.vue";
 import chromatic from "./music/chromatic_data.js";
-import twinkle from "./music/twinkle_data.js";
+import twinkle_short from "./music/twinkle_short.js";
 
 export default {
   name: "Lesson1b",
@@ -84,7 +84,10 @@ export default {
     Piano,
   },
   data: function () {
-    return { chromatic_data: chromatic.data, twinkle_data: twinkle.data };
+    return {
+      chromatic_data: chromatic.data,
+      twinkle_short: twinkle_short.data,
+    };
   },
 };
 </script>

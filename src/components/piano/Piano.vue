@@ -40,6 +40,7 @@ export default {
     title: String,
     bpm: { type: Number, default: 120 },
     octaves: { type: Number, default: 2 },
+    base_octave: { type: Number, default: 0 },
     interactive: { type: Boolean, default: false },
     min_interactive: { type: Number, default: 0 },
     max_interactive: { type: Number, default: 100 },
@@ -62,7 +63,11 @@ export default {
   },
   computed: {
     keyhz() {
-      return 130.82 * Math.pow(1.0594631, this.keynum);
+      return (
+        261.64 *
+        Math.pow(1.0594631, this.keynum) *
+        Math.pow(2, this.base_octave)
+      );
     },
     keynum() {
       if (this.interactive) {
@@ -88,7 +93,7 @@ export default {
     },
   },
   methods: {
-    to_div(duration) {
+    duration_to_div(duration) {
       switch (duration) {
         default:
         case 1:
@@ -107,66 +112,58 @@ export default {
           return "1t";
       }
     },
-    to_half_steps(scale_num) {
-      if (scale_num % 12 < 4) {
-        return scale_num * 2 - 2;
+    scale_to_step(scale_num) {
+      scale_num -= 1;
+      let octaves = Math.floor(scale_num / 7);
+      scale_num %= 7;
+      if (scale_num < 3) {
+        scale_num *= 2;
       } else {
-        return scale_num * 2 - 3;
+        scale_num = 2 * scale_num - 1;
       }
+      return 12 * octaves + scale_num;
     },
-    to_hz(note) {
+    step_to_hz(note) {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
       if (this.play_state) {
         return;
       }
-
       this.key_data = Array(12 * this.octaves + 1).fill(0);
-      let synth = new Tone.PolySynth().toDestination();
+      Tone.Transport.stop();
+      Tone.Transport.position = 0;
       Tone.Transport.cancel(0);
+      let synth = new Tone.PolySynth().toDestination();
 
       let part = new Tone.Part((time, val) => {
-        if (!Array.isArray(val.chord)) {
-          val.chord = [val.chord];
-        }
-        for (let note of val.chord) {
-          // octave modifier
-          if (Array.isArray(note)) {
-            if (this.scale_locked) {
-              note = this.to_half_steps(note[0]) + 12 * note[1];
-            } else {
-              note = note[0] + 12 * note[1];
-            }
-          } else {
-            if (this.scale_locked) {
-              note = this.to_half_steps(note);
-            }
+        if ("note" in val) {
+          let note = val.note;
+          if (this.scale_locked) {
+            note = this.scale_to_step(note);
+          }
+          if (val.octave) {
+            note = note + 12 * val.octave;
           }
           // sound
           synth.triggerAttackRelease(
-            this.to_hz(note),
-            this.to_div(val.duration)
+            this.step_to_hz(note),
+            this.duration_to_div(val.duration)
           );
           // key graphics
           this.key_data[note + this.keynum] = 1;
           setTimeout(() => {
             this.key_data[note + this.keynum] = 0;
           }, 800 * (60 / this.bpm) * val.duration);
+        } else {
+          this.play_state = false;
         }
       }, this.music_data);
 
       Tone.Transport.bpm.value = this.bpm;
-      part.start(Tone.now());
-      Tone.Transport.start();
-
-      let measures = parseInt(
-        this.music_data[this.music_data.length - 1].time.split(":")[0]
-      );
+      part.start(0);
+      Tone.Transport.start(Tone.now());
       this.play_state = true;
-      setTimeout(() => {
-        this.play_state = false;
-      }, 1000 * (measures + 1) * 4 * (60 / this.bpm));
     },
     play_key(key) {
       if (this.play_state) {
