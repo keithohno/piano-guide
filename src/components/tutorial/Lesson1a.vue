@@ -26,8 +26,9 @@
       :interactive="true"
       :max_interactive="11"
       :music_data="[
-        { time: '0:1', note: 0, duration: 1 },
-        { time: '0:2', note: 1, duration: 1 },
+        { time: '0:0', note: 0, duration: 1 },
+        { time: '0:1', note: 1, duration: 1 },
+        { time: '0:3' },
       ]"
     />
     <p>Whole steps:</p>
@@ -37,8 +38,9 @@
       :interactive="true"
       :max_interactive="10"
       :music_data="[
-        { time: '0:1', note: 0, duration: 1 },
-        { time: '0:2', note: 2, duration: 1 },
+        { time: '0:0', note: 0, duration: 1 },
+        { time: '0:1', note: 2, duration: 1 },
+        { time: '0:3' },
       ]"
     />
     <p>
@@ -51,9 +53,11 @@
       :interactive="true"
       :max_interactive="12"
       :music_data="[
-        { time: '0:1', note: 0, duration: 1 },
-        { time: '0:2', note: 12, duration: 1 },
-        { time: '1:0', note: 0, octave: 1, duration: 2 },
+        { time: '0:0', note: 0, duration: 1 },
+        { time: '0:1', note: 12, duration: 1 },
+        { time: '0:3', note: 0, octave: 0, duration: 2 },
+        { time: '0:3', note: 0, octave: 1, duration: 2 },
+        { time: '1:1' },
       ]"
     />
     <p>
