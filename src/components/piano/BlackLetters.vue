@@ -45,7 +45,7 @@ export default {
   computed: {
     keynames() {
       let letters = [];
-      for (let i = 0; i < this.pparams.octaves; i++) {
+      for (let i = 0; i < this.pparams.notes / 12; i++) {
         letters.push(["C#\nB♭", 1 + i * 12]);
         letters.push(["D#\nE♭", 3 + i * 12]);
         letters.push(0);
@@ -54,8 +54,9 @@ export default {
         letters.push(["A#\nB♭", 10 + i * 12]);
         letters.push(0);
       }
-      letters.pop();
-      return letters;
+      return letters.filter(
+        (letter) => !letter || letter[1] < this.pparams.notes
+      );
     },
   },
   methods: {

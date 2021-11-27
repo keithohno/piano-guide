@@ -29,7 +29,7 @@ export default {
   computed: {
     wkey_nums() {
       let nums = [];
-      for (let i = 0; i < this.pparams.octaves; i++) {
+      for (let i = 0; i < this.pparams.notes / 12; i++) {
         nums.push(12 * i);
         nums.push(12 * i + 2);
         nums.push(12 * i + 4);
@@ -38,12 +38,11 @@ export default {
         nums.push(12 * i + 9);
         nums.push(12 * i + 11);
       }
-      nums.push(this.pparams.octaves * 12);
-      return nums;
+      return nums.filter((num) => num < this.pparams.notes);
     },
     bkey_nums() {
       let nums = [];
-      for (let i = 0; i < this.pparams.octaves; i++) {
+      for (let i = 0; i < this.pparams.notes / 12; i++) {
         nums.push(12 * i + 1);
         nums.push(12 * i + 3);
         nums.push(-1);
@@ -52,8 +51,7 @@ export default {
         nums.push(12 * i + 10);
         nums.push(-1);
       }
-      nums.pop();
-      return nums;
+      return nums.filter((num) => num < this.pparams.notes);
     },
   },
 };

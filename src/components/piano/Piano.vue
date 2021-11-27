@@ -43,7 +43,7 @@ export default {
     id: String,
     title: String,
     bpm: { type: Number, default: 120 },
-    octaves: { type: Number, default: 2 },
+    notes: { type: Number, default: 13 },
     base_octave: { type: Number, default: 0 },
     interactive: { type: Boolean, default: false },
     min_interactive: { type: Number, default: 0 },
@@ -60,7 +60,7 @@ export default {
   },
   data: function () {
     return {
-      key_data: Array(12 * this.octaves + 1).fill(0),
+      key_data: Array(this.notes).fill(0),
       key_input: 0,
       hovered: false,
     };
@@ -82,7 +82,7 @@ export default {
     },
     pparams() {
       return {
-        octaves: this.octaves,
+        notes: this.notes,
         labeled: this.labeled,
         interactive: this.interactive,
         min_interactive: this.min_interactive,
@@ -125,7 +125,7 @@ export default {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
-      this.key_data = Array(12 * this.octaves + 1).fill(0);
+      this.key_data = Array(this.notes).fill(0);
       Tone.Transport.stop();
       Tone.Transport.position = 0;
       Tone.Transport.cancel(0);
