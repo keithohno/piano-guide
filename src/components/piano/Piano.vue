@@ -13,15 +13,13 @@
         v-if="interactive || labeled"
         @selectkey="play_key"
         :pparams="pparams"
-        :pstate="pstate"
         :hovered="hovered"
       />
-      <Keys :pparams="pparams" :pstate="pstate" />
+      <Keys :pparams="pparams" :key_data="key_data" />
       <WhiteLetters
         v-if="interactive || labeled"
         @selectkey="play_key"
         :pparams="pparams"
-        :pstate="pstate"
         :hovered="hovered"
       />
     </div>
@@ -64,7 +62,6 @@ export default {
     return {
       key_data: Array(12 * this.octaves + 1).fill(0),
       key_input: 0,
-      play_state: false,
       hovered: false,
     };
   },
@@ -90,12 +87,6 @@ export default {
         interactive: this.interactive,
         min_interactive: this.min_interactive,
         max_interactive: this.max_interactive,
-      };
-    },
-    pstate() {
-      return {
-        play_state: this.play_state,
-        key_data: this.key_data,
       };
     },
   },
@@ -134,9 +125,6 @@ export default {
       return this.keyhz * Math.pow(1.0594631, note);
     },
     play() {
-      if (this.play_state) {
-        return;
-      }
       this.key_data = Array(12 * this.octaves + 1).fill(0);
       Tone.Transport.stop();
       Tone.Transport.position = 0;
@@ -163,19 +151,16 @@ export default {
             this.key_data[note + this.keynum] = 0;
           }, 800 * (60 / this.bpm) * val.duration);
         } else {
-          this.play_state = false;
+          this.$store.commit("setplay", false);
         }
       }, this.music_data);
 
       Tone.Transport.bpm.value = this.bpm;
       part.start(0);
       Tone.Transport.start(Tone.now());
-      this.play_state = true;
+      this.$store.commit("setplay", true);
     },
     play_key(key) {
-      if (this.play_state) {
-        return;
-      }
       this.key_input = key;
       this.play();
     },

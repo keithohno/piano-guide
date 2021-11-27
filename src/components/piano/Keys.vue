@@ -8,7 +8,7 @@
         v-for="keynum in wkey_nums"
         :key="keynum"
         class="white-key"
-        :class="{ pressed: pstate.key_data[keynum] }"
+        :class="{ pressed: key_data[keynum] }"
       ></div>
     </div>
     <div class="black-keys">
@@ -16,7 +16,7 @@
         v-for="keynum in bkey_nums"
         :key="keynum"
         class="black-key"
-        :class="{ pressed: pstate.key_data[keynum], invis: keynum == -1 }"
+        :class="{ pressed: key_data[keynum], invis: keynum == -1 }"
       ></div>
     </div>
   </div>
@@ -25,7 +25,7 @@
 <script>
 export default {
   name: "Keys",
-  props: { pparams: Object, pstate: Object },
+  props: { pparams: Object, key_data: Object },
   computed: {
     wkey_nums() {
       let nums = [];

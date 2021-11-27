@@ -12,14 +12,14 @@
           pparams.interactive &&
           note[1] <= pparams.max_interactive &&
           note[1] >= pparams.min_interactive &&
-          !pstate.play_state,
+          !$store.state.playing,
         clickable:
           pparams.interactive &&
           note[1] <= pparams.max_interactive &&
           note[1] >= pparams.min_interactive,
         'unclickable-active':
           hovered &&
-          !pstate.play_state &&
+          !$store.state.playing &&
           pparams.interactive &&
           (note[1] > pparams.max_interactive ||
             note[1] < pparams.min_interactive),
@@ -40,7 +40,6 @@ export default {
   name: "BlackLetters",
   props: {
     pparams: Object,
-    pstate: Object,
     hovered: Boolean,
   },
   computed: {
