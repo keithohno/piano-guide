@@ -9,14 +9,14 @@
       @mouseover="this.hovered = true"
       @mouseleave="this.hovered = false"
     >
-      <BlackLetters
+      <KeyLabelsB
         v-if="interactive || labeled"
         @selectkey="play_key"
         :pparams="pparams"
         :hovered="hovered"
       />
-      <Keys :pparams="pparams" :key_data="key_data" />
-      <WhiteLetters
+      <KeyGraphics :pparams="pparams" :key_data="key_data" />
+      <KeyLabelsW
         v-if="interactive || labeled"
         @selectkey="play_key"
         :pparams="pparams"
@@ -28,16 +28,16 @@
 
 <script>
 import * as Tone from "tone";
-import Keys from "./Keys.vue";
-import WhiteLetters from "./WhiteLetters.vue";
-import BlackLetters from "./BlackLetters.vue";
+import KeyGraphics from "./KeyGraphics.vue";
+import KeyLabelsW from "./KeyLabelsW.vue";
+import KeyLabelsB from "./KeyLabelsB.vue";
 
 export default {
   name: "Piano",
   components: {
-    Keys,
-    WhiteLetters,
-    BlackLetters,
+    KeyGraphics,
+    KeyLabelsW,
+    KeyLabelsB,
   },
   props: {
     id: String,
