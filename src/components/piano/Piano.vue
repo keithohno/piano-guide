@@ -16,6 +16,7 @@
         :hovered="hovered"
       />
       <KeyGraphics :pparams="pparams" :key_data="key_data" />
+      <KeyLabelsNum v-if="scale_labeled" :pparams="pparams" :keynum="keynum" />
       <KeyLabelsW
         v-if="interactive || labeled"
         @selectkey="play_key"
@@ -29,6 +30,7 @@
 <script>
 import * as Tone from "tone";
 import KeyGraphics from "./KeyGraphics.vue";
+import KeyLabelsNum from "./KeyLabelsNum.vue";
 import KeyLabelsW from "./KeyLabelsW.vue";
 import KeyLabelsB from "./KeyLabelsB.vue";
 
@@ -36,6 +38,7 @@ export default {
   name: "Piano",
   components: {
     KeyGraphics,
+    KeyLabelsNum,
     KeyLabelsW,
     KeyLabelsB,
   },
@@ -49,6 +52,7 @@ export default {
     min_interactive: { type: Number, default: 0 },
     max_interactive: { type: Number, default: 100 },
     labeled: { type: Boolean, default: false },
+    scale_labeled: { type: Boolean, default: false },
     key_preset: { type: Number, default: 0 },
     scale_locked: { type: Boolean, default: false },
     music_data: {
