@@ -82,7 +82,7 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
-import chromatic from "./music/chromatic_data.js";
+import chromatic from "./music/chromatic.js";
 
 export default {
   name: "Lesson1a",

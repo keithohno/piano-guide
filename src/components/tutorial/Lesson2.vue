@@ -55,10 +55,10 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
-import mary from "./music/mary_data.js";
-import itsy from "./music/itsy_data.js";
-import twinkle from "./music/twinkle_data.js";
-import jingle from "./music/jingle_data.js";
+import mary from "./music/mary_had_a_little_lamb.js";
+import itsy from "./music/itsy_bitsy_spider.js";
+import twinkle from "./music/twinkle_twinkle_little_star.js";
+import jingle from "./music/jingle_bells.js";
 import snowman from "./music/do_you_wanna_build_a_snowman.js";
 
 export default {
