@@ -46,7 +46,7 @@ export default {
     id: String,
     title: String,
     bpm: { type: Number, default: 120 },
-    notes: { type: Number, default: 13 },
+    notes: { type: Number, default: 12 },
     base_octave: { type: Number, default: 0 },
     interactive: { type: Boolean, default: false },
     min_interactive: { type: Number, default: 0 },
@@ -106,6 +106,10 @@ export default {
           return "2n.";
         case 4:
           return "1n";
+        case 0.5:
+          return "8n";
+        case 1.5:
+          return "4n.";
         case 0.67:
           return "4t";
         case 1.33:
@@ -153,7 +157,7 @@ export default {
           this.key_data[note + this.keynum] = 1;
           setTimeout(() => {
             this.key_data[note + this.keynum] = 0;
-          }, 800 * (60 / this.bpm) * val.duration);
+          }, 1000 * (60 / this.bpm) * val.duration - 70);
         } else {
           this.$store.commit("setplay", false);
         }

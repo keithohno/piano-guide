@@ -1,0 +1,43 @@
+export default {
+  data: [
+    { time: "0:1", note: 1, octave: 1, duration: 0.5 },
+    { time: "0:1.5", note: 1, octave: 1, duration: 0.5 },
+    { time: "0:2", note: 1, octave: 1, duration: 0.5 },
+    { time: "0:2.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "0:3", note: 1, octave: 1, duration: 0.5 },
+    { time: "0:3.5", note: 3, octave: 1, duration: 0.5 },
+    { time: "1:0", note: 2, octave: 1, duration: 1 },
+    { time: "1:1", note: 3, octave: 1, duration: 3 },
+
+    { time: "2:0.5", note: 1, octave: 1, duration: 0.5 },
+    { time: "2:1", note: 1, octave: 1, duration: 0.5 },
+    { time: "2:1.5", note: 1, octave: 1, duration: 0.5 },
+    { time: "2:2", note: 1, octave: 1, duration: 0.5 },
+    { time: "2:2.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "2:3", note: 1, octave: 1, duration: 0.5 },
+    { time: "2:3.5", note: 3, octave: 1, duration: 0.5 },
+    { time: "3:0", note: 2, octave: 1, duration: 4 },
+
+    { time: "4:1.5", note: 1, octave: 1, duration: 0.5 },
+    { time: "4:2", note: 1, octave: 1, duration: 0.5 },
+    { time: "4:2.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "4:3", note: 1, octave: 1, duration: 0.5 },
+    { time: "4:3.5", note: 3, octave: 1, duration: 0.5 },
+    { time: "5:0", note: 4, octave: 1, duration: 0.5 },
+    { time: "5:0.5", note: 3, octave: 1, duration: 0.5 },
+    { time: "5:1", note: 1, octave: 1, duration: 1.5 },
+    { time: "5:2.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "5:3", note: 4, octave: 1, duration: 0.5 },
+    { time: "5:3.5", note: 3, octave: 1, duration: 0.5 },
+
+    { time: "6:0", note: 1, octave: 1, duration: 1.5 },
+    { time: "6:1.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "6:2", note: 1, octave: 1, duration: 0.5 },
+    { time: "6:2.5", note: 5, octave: 0, duration: 0.5 },
+    { time: "6:3", note: 1, octave: 1, duration: 0.5 },
+    { time: "6:3.5", note: 3, octave: 1, duration: 0.5 },
+    { time: "7:0", note: 5, octave: 1, duration: 4 },
+
+    { time: "8:0" },
+  ],
+};
