@@ -4,12 +4,7 @@
     :class="{ labeled: pparams.labeled, unlabeled: !pparams.labeled }"
   >
     <div class="white-keys">
-      <div
-        v-for="(keynum, i) in wkey_num_labels"
-        :key="i"
-        class="white-key"
-        :class="{ pressed: key_data[keynum] }"
-      >
+      <div v-for="(keynum, i) in wkey_num_labels" :key="i" class="white-key">
         <div v-if="keynum > 0" class="white-key-label">
           {{ keynum }}
         </div>
@@ -20,7 +15,7 @@
         v-for="(keynum, i) in bkey_num_labels"
         :key="i"
         class="black-key"
-        :class="{ pressed: key_data[keynum], invis: keynum == -1 }"
+        :class="{ invis: keynum == -1 }"
       >
         <div v-if="keynum > 0" class="black-key-label">
           {{ keynum }}
@@ -35,7 +30,7 @@ let scale_steps = [0, 2, 4, 5, 7, 9, 11];
 
 export default {
   name: "KeyLabelsNum",
-  props: { pparams: Object, key_data: Object, keynum: Number },
+  props: { pparams: Object, keynum: Number },
   computed: {
     num_labels() {
       let nums = Array(this.pparams.notes).fill(0);
@@ -86,8 +81,8 @@ export default {
   align-self: flex-end;
   text-align: center;
   border-radius: 9px;
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   z-index: 5;
   font-size: 20px;
 }
@@ -132,7 +127,6 @@ export default {
   margin-right: 10px;
   width: 36px;
   height: 100px;
-  z-index: 2;
 }
 .invis {
   width: 11.7px;
