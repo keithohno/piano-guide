@@ -76,20 +76,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.l1a-letters {
-  display: flex;
-  flex-direction: row;
-  zoom: 0.7;
-  -moz-transform: scale(0.7);
-}
-.l1a-letter-div {
-  box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  text-align: center;
-  padding: 15px;
-}
-</style>
