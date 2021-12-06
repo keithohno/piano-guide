@@ -3,6 +3,7 @@ import Lesson1 from "./components/tutorial/Lesson1.vue";
 import Lesson2 from "./components/tutorial/Lesson2.vue";
 import Lesson3 from "./components/tutorial/Lesson3.vue";
 import Lesson4 from "./components/tutorial/Lesson4.vue";
+import Lesson5 from "./components/tutorial/Lesson5.vue";
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   {
     path: "/4",
     component: Lesson4,
+  },
+  {
+    path: "/5",
+    component: Lesson5,
   },
 ];
 const router = createRouter({
