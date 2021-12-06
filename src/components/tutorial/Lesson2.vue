@@ -14,7 +14,6 @@
     <Piano
       title="Twinkle Twinkle Little Star"
       :key_preset="0"
-      :base_octave="1"
       :scale_locked="true"
       :music_data="twinkle"
     />
@@ -34,7 +33,6 @@
       title="Jingle Bells"
       :bpm="180"
       :key_preset="0"
-      :base_octave="-1"
       :scale_locked="true"
       :music_data="jingle"
     />
@@ -42,6 +40,7 @@
       title="Do You Wanna Build a Snowman"
       :notes="24"
       :key_preset="0"
+      :base_octave="-1"
       :scale_locked="true"
       :music_data="snowman"
     />
