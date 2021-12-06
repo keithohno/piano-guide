@@ -85,7 +85,7 @@ import Piano from "../piano/Piano.vue";
 import chromatic from "./music/chromatic.js";
 
 export default {
-  name: "Lesson1a",
+  name: "Lesson1",
   components: {
     Piano,
   },

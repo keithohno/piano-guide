@@ -61,7 +61,7 @@ import jingle from "./music/jingle_bells.js";
 import snowman from "./music/do_you_wanna_build_a_snowman.js";
 
 export default {
-  name: "Lesson1a",
+  name: "Lesson2",
   components: {
     Piano,
   },
