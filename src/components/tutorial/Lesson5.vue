@@ -73,7 +73,7 @@ import Piano from "../piano/Piano.vue";
 import happy from "./music/happy_birthday.js";
 
 export default {
-  name: "Lesson4",
+  name: "Lesson5",
   components: {
     Piano,
   },
