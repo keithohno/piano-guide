@@ -1,31 +1,31 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "./components/Home.vue";
-import Lesson1 from "./components/tutorial/Lesson1.vue";
-import Lesson2 from "./components/tutorial/Lesson2.vue";
-import Lesson3 from "./components/tutorial/Lesson3.vue";
-import Lesson4 from "./components/tutorial/Lesson4.vue";
-import Lesson5 from "./components/tutorial/Lesson5.vue";
+import LessonNotes from "./components/lessons/LessonNotes.vue";
+import LessonPracticeNotes from "./components/lessons/LessonPracticeNotes.vue";
+import LessonStepsSharpsFlats from "./components/lessons/LessonStepsSharpsFlats.vue";
+import LessonScales from "./components/lessons/LessonScales.vue";
+import LessonKeys from "./components/lessons/LessonKeys.vue";
 
 const routes = [
   {
     path: "/notes",
-    component: Lesson1,
+    component: LessonNotes,
   },
   {
     path: "/practice_notes",
-    component: Lesson2,
+    component: LessonPracticeNotes,
   },
   {
     path: "/steps_sharps_flats",
-    component: Lesson3,
+    component: LessonStepsSharpsFlats,
   },
   {
     path: "/scales",
-    component: Lesson4,
+    component: LessonScales,
   },
   {
     path: "/keys",
-    component: Lesson5,
+    component: LessonKeys,
   },
   {
     path: "/",
