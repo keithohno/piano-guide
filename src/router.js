@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Home from "./components/Home.vue";
 import Lesson1 from "./components/tutorial/Lesson1.vue";
 import Lesson2 from "./components/tutorial/Lesson2.vue";
 import Lesson3 from "./components/tutorial/Lesson3.vue";
@@ -7,24 +8,28 @@ import Lesson5 from "./components/tutorial/Lesson5.vue";
 
 const routes = [
   {
-    path: "/1",
+    path: "/notes",
     component: Lesson1,
   },
   {
-    path: "/2",
+    path: "/practice_notes",
     component: Lesson2,
   },
   {
-    path: "/3",
+    path: "/steps_sharps_flats",
     component: Lesson3,
   },
   {
-    path: "/4",
+    path: "/scales",
     component: Lesson4,
   },
   {
-    path: "/5",
+    path: "/keys",
     component: Lesson5,
+  },
+  {
+    path: "/",
+    component: Home,
   },
 ];
 const router = createRouter({

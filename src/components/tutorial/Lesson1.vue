@@ -1,4 +1,5 @@
 <template>
+  <Navbar page="notes" />
   <div class="lesson-container">
     <p>
       In western music, all sounds and tones are divided into a set of twelve
@@ -82,12 +83,14 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
+import Navbar from "../Navbar.vue";
 import chromatic from "./music/chromatic.js";
 
 export default {
   name: "Lesson1",
   components: {
     Piano,
+    Navbar,
   },
   data: function () {
     return {

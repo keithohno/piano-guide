@@ -1,4 +1,5 @@
 <template>
+  <Navbar page="practice_notes" />
   <div class="lesson-container">
     <p>
       You now have a basic knowledge of how musical sounds are 'organized' onto
@@ -54,6 +55,7 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
+import Navbar from "../Navbar.vue";
 import mary from "./music/mary_had_a_little_lamb.js";
 import itsy from "./music/itsy_bitsy_spider.js";
 import twinkle from "./music/twinkle_twinkle_little_star.js";
@@ -64,6 +66,7 @@ export default {
   name: "Lesson2",
   components: {
     Piano,
+    Navbar,
   },
   data: function () {
     return {

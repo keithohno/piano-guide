@@ -1,4 +1,5 @@
 <template>
+  <Navbar page="keys" />
   <div class="lesson-container">
     <p>
       Chances are, at some point in the past, you've noticed that the same song
@@ -70,12 +71,14 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
+import Navbar from "../Navbar.vue";
 import happy from "./music/happy_birthday.js";
 
 export default {
   name: "Lesson5",
   components: {
     Piano,
+    Navbar,
   },
   data: function () {
     return {

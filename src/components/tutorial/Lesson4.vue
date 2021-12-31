@@ -1,4 +1,5 @@
 <template>
+  <Navbar page="scales" />
   <div class="lesson-container">
     <p>
       A <strong>scale</strong> is a sequence of notes that follows a
@@ -38,11 +39,13 @@
 <script>
 import Piano from "../piano/Piano.vue";
 import scale from "./music/scale.js";
+import Navbar from "../Navbar.vue";
 
 export default {
   name: "Lesson4",
   components: {
     Piano,
+    Navbar,
   },
   data: function () {
     return {

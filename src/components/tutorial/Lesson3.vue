@@ -1,4 +1,5 @@
 <template>
+  <Navbar page="steps_sharps_flats" />
   <div class="lesson-container">
     <p>
       Previously, we assigned letter names from A to G for all the white notes
@@ -51,12 +52,14 @@
 
 <script>
 import Piano from "../piano/Piano.vue";
+import Navbar from "../Navbar.vue";
 import chromatic from "./music/chromatic.js";
 
 export default {
   name: "Lesson3",
   components: {
     Piano,
+    Navbar,
   },
   data: function () {
     return {
