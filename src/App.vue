@@ -1,5 +1,7 @@
 <template>
-  <div id="root"><router-view /></div>
+  <div id="root">
+    <div id="contents"><router-view /></div>
+  </div>
 </template>
 
 <script>
@@ -14,10 +16,8 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-#root > div {
-  position: absolute;
+#contents {
   font-size: 24px;
-  flex-direction: column;
   width: 60%;
   min-width: 800px;
 }
