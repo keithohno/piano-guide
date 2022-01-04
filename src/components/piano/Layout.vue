@@ -1,5 +1,11 @@
 <template>
-  <div class="layout">
+  <div
+    class="layout"
+    :class="{
+      'layout-labeled-top': labeled_top,
+      'layout-labeled-bot': labeled_bot,
+    }"
+  >
     <div
       v-for="(color, i) in colors"
       :key="i"
@@ -22,6 +28,11 @@
         :keynum="i"
         @selectkey="this.$emit('selectkey', $event)"
       />
+      <KeyLabel
+        v-if="labels && labels[i]"
+        :label="labels[i]"
+        :color="color === 'w' ? 'white' : 'black'"
+      />
     </div>
   </div>
 </template>
@@ -29,11 +40,21 @@
 <script>
 import KeyBackground from "./KeyBackground.vue";
 import KeyClickable from "./KeyClickable.vue";
+import KeyLabel from "./KeyLabel.vue";
 
 export default {
   name: "Keys",
-  components: { KeyBackground, KeyClickable },
-  props: { pparams: Object, key_data: Array, hovered: Boolean },
+  components: {
+    KeyBackground,
+    KeyClickable,
+    KeyLabel,
+  },
+  props: {
+    pparams: Object,
+    key_data: Array,
+    labels: Array,
+    hovered: Boolean,
+  },
   computed: {
     colors() {
       let colors = [];
@@ -53,6 +74,22 @@ export default {
       }
       return colors.slice(0, this.pparams.notes);
     },
+    labeled_top() {
+      for (let i = 0; i < this.pparams.notes; i++) {
+        if (this.labels && this.labels[i] && this.colors[i] == "b") {
+          return true;
+        }
+      }
+      return false;
+    },
+    labeled_bot() {
+      for (let i = 0; i < this.pparams.notes; i++) {
+        if (this.labels && this.labels[i] && this.colors[i] == "w") {
+          return true;
+        }
+      }
+      return false;
+    },
   },
 };
 </script>
@@ -62,7 +99,12 @@ export default {
   position: relative;
   display: flex;
   flex-direction: row;
-  height: 180px;
+}
+.layout-labeled-top {
+  padding-top: 50px;
+}
+.layout-labeled-bot {
+  padding-bottom: 50px;
 }
 .layout-white-key {
   position: relative;
