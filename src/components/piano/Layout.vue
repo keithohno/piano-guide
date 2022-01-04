@@ -101,25 +101,25 @@ export default {
   flex-direction: row;
 }
 .layout-labeled-top {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 .layout-labeled-bot {
-  padding-bottom: 50px;
+  padding-bottom: 20px;
 }
 .layout-white-key {
   position: relative;
   box-sizing: border-box;
-  width: 52px;
-  height: 180px;
+  width: 40px;
+  height: 140px;
   margin-right: -3px;
 }
 .layout-black-key {
   position: relative;
   box-sizing: border-box;
-  margin-left: -18px;
-  margin-right: -18px;
-  width: 36px;
-  height: 100px;
+  margin-left: -12px;
+  margin-right: -15px;
+  width: 27px;
+  height: 80px;
   z-index: 1;
 }
 </style>

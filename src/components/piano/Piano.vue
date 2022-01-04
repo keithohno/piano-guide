@@ -166,14 +166,4 @@ export default {
 .play-button {
   font-size: 20px;
 }
-.p-labeled {
-  height: 280px;
-}
-.p-unlabeled {
-  height: 180px;
-}
-.piano-container {
-  zoom: 0.7;
-  -moz-transform: scale(0.7);
-}
 </style>

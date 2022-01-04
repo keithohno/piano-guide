@@ -24,16 +24,17 @@ export default {
   position: absolute;
   box-sizing: border-box;
   width: 100%;
-  height: 50px;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  font-size: 20px;
 }
 .keylabel-upper {
-  top: -50px;
+  top: -40px;
 }
 .keylabel-lower {
-  top: 180px;
+  top: 140px;
 }
 </style>
