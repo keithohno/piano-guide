@@ -9,38 +9,19 @@
       @mouseover="this.hovered = true"
       @mouseleave="this.hovered = false"
     >
-      <KeyLabelsB
-        v-if="interactive || labeled"
-        @selectkey="play_key"
-        :pparams="pparams"
-        :hovered="hovered"
-      />
-      <KeyGraphics :pparams="pparams" :key_data="key_data" />
-      <KeyLabelsNum v-if="scale_labeled" :pparams="pparams" :keynum="keynum" />
-      <KeyLabelsW
-        v-if="interactive || labeled"
-        @selectkey="play_key"
-        :pparams="pparams"
-        :hovered="hovered"
-      />
+      <Layout :pparams="pparams" :key_data="key_data" :hovered="hovered" />
     </div>
   </div>
 </template>
 
 <script>
 import * as Tone from "tone";
-import KeyGraphics from "./KeyGraphics.vue";
-import KeyLabelsNum from "./KeyLabelsNum.vue";
-import KeyLabelsW from "./KeyLabelsW.vue";
-import KeyLabelsB from "./KeyLabelsB.vue";
+import Layout from "./Layout.vue";
 
 export default {
   name: "Piano",
   components: {
-    KeyGraphics,
-    KeyLabelsNum,
-    KeyLabelsW,
-    KeyLabelsB,
+    Layout,
   },
   props: {
     id: String,
