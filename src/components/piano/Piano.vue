@@ -9,7 +9,12 @@
       @mouseover="this.hovered = true"
       @mouseleave="this.hovered = false"
     >
-      <Layout :pparams="pparams" :key_data="key_data" :hovered="hovered" />
+      <Layout
+        :pparams="pparams"
+        :key_data="key_data"
+        :hovered="hovered"
+        @selectkey="play_key"
+      />
     </div>
   </div>
 </template>

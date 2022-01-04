@@ -2,8 +2,8 @@
   <div class="layout">
     <div class="layout-whites">
       <div v-for="keynum in wkey_nums" :key="keynum" class="layout-white-key">
-        <KeyShade
-          :pressed="key_data[keynum]"
+        <KeyBackground :pressed="key_data[keynum]" :color="'white'" />
+        <KeyClickable
           :color="'white'"
           :disabled="
             pparams.interactive &&
@@ -11,6 +11,8 @@
             (keynum > pparams.max_interactive ||
               keynum < pparams.min_interactive)
           "
+          :keynum="keynum"
+          @selectkey="this.$emit('selectkey', $event)"
         />
       </div>
     </div>
@@ -21,8 +23,8 @@
         class="layout-black-key"
         :class="{ invis: keynum == -1 }"
       >
-        <KeyShade
-          :pressed="key_data[keynum]"
+        <KeyBackground :pressed="key_data[keynum]" :color="'black'" />
+        <KeyClickable
           :color="'black'"
           :disabled="
             pparams.interactive &&
@@ -30,6 +32,8 @@
             (keynum > pparams.max_interactive ||
               keynum < pparams.min_interactive)
           "
+          @selectkey="this.$emit('selectkey', $event)"
+          :keynum="keynum"
         />
       </div>
     </div>
@@ -37,11 +41,12 @@
 </template>
 
 <script>
-import KeyShade from "./KeyShade.vue";
+import KeyBackground from "./KeyBackground.vue";
+import KeyClickable from "./KeyClickable.vue";
 
 export default {
   name: "Keys",
-  components: { KeyShade },
+  components: { KeyBackground, KeyClickable },
   props: { pparams: Object, key_data: Array, hovered: Boolean },
   computed: {
     wkey_nums() {

@@ -1,55 +1,35 @@
 <template>
   <div
-    class="keyshade-base"
-    :class="{
-      green: pressed,
-      black: color == 'black',
-      white: color == 'white',
-    }"
-  />
-  <div
     v-if="!$store.state.playing"
-    class="keyshade-interactive"
+    class="keyclickable"
     :class="{
       'black-clickable': color == 'black' && !disabled,
       'white-clickable': color == 'white' && !disabled,
       'black-disabled': color == 'black' && disabled,
       'white-disabled': color == 'white' && disabled,
     }"
+    @click="this.$emit('selectkey', keynum)"
   />
 </template>
 
 <script>
 export default {
-  name: "KeyGraphic",
+  names: "KeyClickable",
   props: {
     color: String,
-    pressed: Boolean,
     disabled: Boolean,
+    keynum: Number,
   },
 };
 </script>
 
 <style scoped>
-.keyshade-base,
-.keyshade-interactive {
+.keyclickable {
   position: absolute;
   box-sizing: border-box;
   border: 3px solid black;
   width: 100%;
   height: 100%;
-}
-.keyshade-interactive {
-  z-index: 1;
-}
-.green {
-  background-color: #99ccaa;
-}
-.black {
-  background-color: black;
-}
-.white {
-  background-color: white;
 }
 .black-clickable:hover {
   background-color: #413;
