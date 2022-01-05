@@ -13,6 +13,7 @@
         :pparams="pparams"
         :key_data="key_data"
         :hovered="hovered"
+        :labels="labels"
         @selectkey="play_key"
       />
     </div>
@@ -37,8 +38,7 @@ export default {
     interactive: { type: Boolean, default: false },
     min_interactive: { type: Number, default: 0 },
     max_interactive: { type: Number, default: 100 },
-    labeled: { type: Boolean, default: false },
-    scale_labeled: { type: Boolean, default: false },
+    labels: { type: Array, default: () => [] },
     key_preset: { type: Number, default: 0 },
     scale_locked: { type: Boolean, default: false },
     music_data: {
@@ -73,7 +73,6 @@ export default {
     pparams() {
       return {
         notes: this.notes,
-        labeled: this.labeled,
         interactive: this.interactive,
         min_interactive: this.min_interactive,
         max_interactive: this.max_interactive,

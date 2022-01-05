@@ -12,16 +12,8 @@
       :bpm="160"
       :key_preset="0"
       :music_data="this.chromatic"
+      :labels="labels"
     />
-    <div class="l1a-letters">
-      <div class="l1a-letter-div">C</div>
-      <div class="l1a-letter-div">D</div>
-      <div class="l1a-letter-div">E</div>
-      <div class="l1a-letter-div">F</div>
-      <div class="l1a-letter-div">G</div>
-      <div class="l1a-letter-div">A</div>
-      <div class="l1a-letter-div">B</div>
-    </div>
     <p>
       Notice that the <strong>pitch</strong> of the sound changes from each note
       to the next. The notes towards the left are more deep and resounding. The
@@ -46,23 +38,8 @@
         { time: '0:3', note: 0, octave: 1, duration: 2 },
         { time: '1:1' },
       ]"
+      :labels="labels.concat(labels)"
     />
-    <div class="l1a-letters">
-      <div class="l1a-letter-div">C</div>
-      <div class="l1a-letter-div">D</div>
-      <div class="l1a-letter-div">E</div>
-      <div class="l1a-letter-div">F</div>
-      <div class="l1a-letter-div">G</div>
-      <div class="l1a-letter-div">A</div>
-      <div class="l1a-letter-div">B</div>
-      <div class="l1a-letter-div">C</div>
-      <div class="l1a-letter-div">D</div>
-      <div class="l1a-letter-div">E</div>
-      <div class="l1a-letter-div">F</div>
-      <div class="l1a-letter-div">G</div>
-      <div class="l1a-letter-div">A</div>
-      <div class="l1a-letter-div">B</div>
-    </div>
     <p>
       An <strong>octave</strong> is the interval, or distance, between two of
       the same lettered note.
@@ -85,6 +62,7 @@
 import Piano from "../piano/Piano.vue";
 import Navbar from "../Navbar.vue";
 import chromatic from "./music/chromatic.js";
+import labels from "./data/labels.js";
 
 export default {
   name: "Lesson1",
@@ -95,6 +73,7 @@ export default {
   data: function () {
     return {
       chromatic: chromatic.data,
+      labels: labels.whitekeys,
     };
   },
 };
