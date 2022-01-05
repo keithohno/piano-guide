@@ -19,7 +19,7 @@
         :color="color === 'w' ? 'white' : 'black'"
       />
       <KeyClickable
-        v-if="interactive"
+        v-if="pparams.interactive"
         :color="color === 'w' ? 'white' : 'black'"
         :disabled="
           pparams.interactive &&
