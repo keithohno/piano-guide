@@ -40,8 +40,8 @@
     <Piano
       title="Sharps and Flats, Labeled"
       :key_preset="0"
-      :labeled="true"
       :music_data="chromatic"
+      :labels="labels"
     />
     <p>
       The sharp # or flat ♭ is always placed after the note it 'modifies,' and
@@ -54,6 +54,7 @@
 import Piano from "../piano/Piano.vue";
 import Navbar from "../Navbar.vue";
 import chromatic from "./music/chromatic.js";
+import labels from "./data/labels.js";
 
 export default {
   name: "Lesson3",
@@ -64,6 +65,7 @@ export default {
   data: function () {
     return {
       chromatic: chromatic.data,
+      labels: labels.allkeys,
     };
   },
 };
