@@ -34,6 +34,7 @@
         :label="labels[i]"
         :color="color === 'w' ? 'white' : 'black'"
       />
+      <KeySticker v-if="stickers && stickers[i]" :sticker="stickers[i]" />
     </div>
   </div>
 </template>
@@ -42,6 +43,7 @@
 import KeyBackground from "./KeyBackground.vue";
 import KeyClickable from "./KeyClickable.vue";
 import KeyLabel from "./KeyLabel.vue";
+import KeySticker from "./KeySticker.vue";
 
 export default {
   name: "Keys",
@@ -49,11 +51,13 @@ export default {
     KeyBackground,
     KeyClickable,
     KeyLabel,
+    KeySticker,
   },
   props: {
     pparams: Object,
     key_data: Array,
     labels: Array,
+    stickers: Array,
     hovered: Boolean,
   },
   computed: {

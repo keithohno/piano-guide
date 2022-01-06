@@ -10,6 +10,7 @@
         :key_data="key_data"
         :hovered="hovered"
         :labels="labels"
+        :stickers="stickers"
         @selectkey="play_key"
       />
     </div>
@@ -47,6 +48,7 @@ export default {
   data: function () {
     return {
       key_data: Array(this.notes).fill(0),
+      stickers: Array(this.notes).fill(0),
       key_input: 0,
       hovered: false,
     };
@@ -136,8 +138,10 @@ export default {
           );
           // key graphics
           this.key_data[note + this.keynum] = 1;
+          this.stickers[note + this.keynum] = val.sticker;
           setTimeout(() => {
             this.key_data[note + this.keynum] = 0;
+            this.stickers[note + this.keynum] = 0;
           }, 1000 * (60 / this.bpm) * val.duration - 70);
         } else {
           this.$store.commit("setplay", false);
