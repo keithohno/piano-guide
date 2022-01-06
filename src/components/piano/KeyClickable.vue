@@ -8,7 +8,13 @@
       'black-disabled': color == 'black' && disabled,
       'white-disabled': color == 'white' && disabled,
     }"
-    @click="this.$emit('selectkey', keynum)"
+    @click="
+      () => {
+        if (!disabled) {
+          this.$emit('selectkey', keynum);
+        }
+      }
+    "
   />
 </template>
 
