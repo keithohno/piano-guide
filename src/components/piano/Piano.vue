@@ -4,11 +4,7 @@
       {{ title }}
       <button @click="play" v-if="!interactive" class="play-button">▶</button>
     </p>
-    <div
-      :class="{ 'p-labeled': labeled, 'p-unlabeled': !labeled }"
-      @mouseover="this.hovered = true"
-      @mouseleave="this.hovered = false"
-    >
+    <div @mouseover="this.hovered = true" @mouseleave="this.hovered = false">
       <Layout
         :pparams="pparams"
         :key_data="key_data"
@@ -155,6 +151,7 @@ export default {
     },
     play_key(key) {
       this.key_input = key;
+      this.$emit("selectkey", key);
       this.play();
     },
   },
