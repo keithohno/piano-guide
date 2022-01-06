@@ -26,12 +26,12 @@
     <Piano
       title="Scale Demo with Numberings"
       :notes="24"
-      :key_preset="0"
       :interactive="true"
       :max_interactive="11"
       :scale_locked="true"
-      :scale_labeled="true"
       :music_data="scale"
+      :labels="labels"
+      @selectkey="handle_selectkey"
     />
   </div>
 </template>
@@ -40,6 +40,7 @@
 import Piano from "../piano/Piano.vue";
 import scale from "./music/scale.js";
 import Navbar from "../Navbar.vue";
+import labels from "./data/labels.js";
 
 export default {
   name: "Lesson4",
@@ -47,10 +48,27 @@ export default {
     Piano,
     Navbar,
   },
+  computed: {
+    labels() {
+      if (this.key === null) {
+        return [];
+      }
+      return labels.scalenums
+        .concat(labels.scalenums)
+        .concat(labels.scalenums)
+        .slice(12 - this.key, 36 - this.key);
+    },
+  },
   data: function () {
     return {
       scale: scale.data,
+      key: null,
     };
+  },
+  methods: {
+    handle_selectkey(key) {
+      this.key = key;
+    },
   },
 };
 </script>
