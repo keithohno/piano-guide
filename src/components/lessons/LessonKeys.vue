@@ -57,9 +57,9 @@
       :min_interactive="5"
       :max_interactive="16"
       :scale_locked="true"
-      :scale_labeled="true"
-      :labeled="true"
       :music_data="happy"
+      :labels="labels"
+      @selectkey="handle_selectkey"
     />
     <p>
       The key intuition here is that the spaces between notes are more important
@@ -73,6 +73,7 @@
 import Piano from "../piano/Piano.vue";
 import Navbar from "../Navbar.vue";
 import happy from "./music/happy_birthday.js";
+import labels from "./data/labels.js";
 
 export default {
   name: "Lesson5",
@@ -80,10 +81,27 @@ export default {
     Piano,
     Navbar,
   },
+  computed: {
+    labels() {
+      if (this.key === null) {
+        return [];
+      }
+      return labels.scalenums
+        .concat(labels.scalenums)
+        .concat(labels.scalenums)
+        .slice(12 - this.key, 36 - this.key);
+    },
+  },
   data: function () {
     return {
       happy: happy.data,
+      key: null,
     };
+  },
+  methods: {
+    handle_selectkey(key) {
+      this.key = key % 12;
+    },
   },
 };
 </script>
