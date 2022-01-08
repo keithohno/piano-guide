@@ -106,6 +106,9 @@ export default {
             if (this.scale_locked) {
               note = this.scale_to_step(note);
             }
+            if (val.octave) {
+              note = note + 12 * val.octave;
+            }
             // key press event
             if (val.type === 0) {
               // sound
@@ -136,7 +139,8 @@ export default {
           return {
             time: val[0] * (60 / this.bpm),
             duration: val[1],
-            note: val[2] + 12 * val[3],
+            note: val[2],
+            octave: val[3],
             type: val[4],
             params: val[5] ? val[5] : 0,
           };
