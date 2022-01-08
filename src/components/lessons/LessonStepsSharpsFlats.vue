@@ -15,22 +15,14 @@
       :notes="12"
       :interactive="true"
       :max_interactive="10"
-      :music_data="[
-        { time: '0:0', note: 0, duration: 1 },
-        { time: '0:1', note: 1, duration: 1 },
-        { time: '0:2' },
-      ]"
+      :music_data="[[0, 1, 0, 0, 0], [1, 1, 1, 0, 0], [2]]"
     />
     <Piano
       title="Whole Step Demo"
       :notes="12"
       :interactive="true"
       :max_interactive="9"
-      :music_data="[
-        { time: '0:0', note: 0, duration: 1 },
-        { time: '0:1', note: 2, duration: 1 },
-        { time: '0:2' },
-      ]"
+      :music_data="[[0, 1, 0, 0, 0], [1, 1, 2, 0, 0], [2]]"
     />
     <p>
       <strong>Sharps</strong> (#) raise the pitch of a note by one half-step.

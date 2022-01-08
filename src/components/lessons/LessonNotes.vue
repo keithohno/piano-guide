@@ -29,14 +29,15 @@
     <Piano
       title="Octave Demo"
       :notes="24"
+      :scale_locked="true"
       :interactive="true"
       :max_interactive="11"
       :music_data="[
-        { time: '0:0', note: 0, duration: 1 },
-        { time: '0:1', note: 12, duration: 1 },
-        { time: '0:3', note: 0, octave: 0, duration: 2 },
-        { time: '0:3', note: 0, octave: 1, duration: 2 },
-        { time: '1:1' },
+        [0, 1, 1, 0, 0],
+        [1, 1, 8, 0, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 8, 0, 0],
+        [5],
       ]"
       :labels="labels.concat(labels)"
     />
