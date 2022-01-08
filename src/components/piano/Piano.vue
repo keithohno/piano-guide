@@ -78,29 +78,6 @@ export default {
     },
   },
   methods: {
-    duration_to_div(duration) {
-      switch (duration) {
-        default:
-        case 1:
-          return "4n";
-        case 2:
-          return "2n";
-        case 3:
-          return "2n.";
-        case 4:
-          return "1n";
-        case 0.5:
-          return "8n";
-        case 1.5:
-          return "4n.";
-        case 0.67:
-          return "4t";
-        case 1.33:
-          return "2t";
-        case 2.67:
-          return "1t";
-      }
-    },
     scale_to_step(scale_num) {
       scale_num -= 1;
       let octaves = Math.floor(scale_num / 7);
@@ -122,33 +99,50 @@ export default {
       Tone.Transport.cancel(0);
       let synth = new Tone.PolySynth().toDestination();
 
-      let part = new Tone.Part((time, val) => {
-        if ("note" in val) {
-          let note = val.note;
-          if (this.scale_locked) {
-            note = this.scale_to_step(note);
+      let part = new Tone.Part(
+        (time, val) => {
+          if ("note" in val) {
+            let note = val.note;
+            if (this.scale_locked) {
+              note = this.scale_to_step(note);
+            }
+            // key press event
+            if (val.type === 0) {
+              // sound
+              synth.triggerAttackRelease(
+                this.step_to_hz(note),
+                val.duration * (60 / this.bpm)
+              );
+              // key press data
+              this.key_data[note + this.keynum] = 1;
+              setTimeout(() => {
+                this.key_data[note + this.keynum] = 0;
+              }, 1000 * (60 / this.bpm) * val.duration - 70);
+            }
+            // sticker event
+            else {
+              this.stickers[note + this.keynum] = val.params.toString();
+              setTimeout(() => {
+                this.stickers[note + this.keynum] = 0;
+              }, 1000 * (60 / this.bpm) * val.duration);
+            }
+            // end of music data
+          } else {
+            this.$store.commit("setplay", false);
           }
-          if (val.octave) {
-            note = note + 12 * val.octave;
-          }
-          // sound
-          synth.triggerAttackRelease(
-            this.step_to_hz(note),
-            this.duration_to_div(val.duration)
-          );
-          // key graphics
-          this.key_data[note + this.keynum] = 1;
-          this.stickers[note + this.keynum] = val.sticker;
-          setTimeout(() => {
-            this.key_data[note + this.keynum] = 0;
-            this.stickers[note + this.keynum] = 0;
-          }, 1000 * (60 / this.bpm) * val.duration - 70);
-        } else {
-          this.$store.commit("setplay", false);
-        }
-      }, this.music_data);
+        },
+        // convert array to object data
+        this.music_data.map((val) => {
+          return {
+            time: val[0] * (60 / this.bpm),
+            duration: val[1],
+            note: val[2] + 12 * val[3],
+            type: val[4],
+            params: val[5] ? val[5] : 0,
+          };
+        })
+      );
 
-      Tone.Transport.bpm.value = this.bpm;
       part.start(0);
       Tone.Transport.start(Tone.now());
       this.$store.commit("setplay", true);

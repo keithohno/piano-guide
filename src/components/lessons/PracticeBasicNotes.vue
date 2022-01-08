@@ -29,12 +29,14 @@
       :key_preset="0"
       :scale_locked="true"
       :music_data="mary"
+      :bpm="90"
     />
     <Piano
       title="Jingle Bells"
       :key_preset="0"
       :scale_locked="true"
       :music_data="jingle"
+      :bpm="120"
     />
   </div>
 </template>
