@@ -30,7 +30,8 @@
       :scale_locked="true"
       :bpm="90"
       :keypress_data="mary.keypress"
-      :sticker_data="mary.sticker"
+      :sticker_data="hand ? mary.rsticker : mary.lsticker"
+      :base_octave="hand ? 0 : -1"
     />
     <Piano
       title="Jingle Bells"
@@ -38,8 +39,14 @@
       :scale_locked="true"
       :bpm="120"
       :keypress_data="jingle.keypress"
-      :sticker_data="jingle.sticker"
+      :sticker_data="hand ? jingle.rsticker : jingle.lsticker"
+      :base_octave="hand ? 0 : -1"
     />
+    <p>
+      Click the button below to toggle which hand you are using to play.
+      Currently using {{ hand ? "right" : "left" }}-hand fingering.
+      <button @click="toggle_hand">Toggle</button>
+    </p>
   </div>
 </template>
 
@@ -59,7 +66,13 @@ export default {
     return {
       mary: mary,
       jingle: jingle,
+      hand: 1,
     };
+  },
+  methods: {
+    toggle_hand() {
+      this.hand = !this.hand;
+    },
   },
 };
 </script>
