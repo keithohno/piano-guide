@@ -45,10 +45,7 @@
 import Piano from "../piano/Piano.vue";
 import Navbar from "../Navbar.vue";
 import mary from "./music/mary_had_a_little_lamb.js";
-import itsy from "./music/itsy_bitsy_spider.js";
-import twinkle from "./music/twinkle_twinkle_little_star.js";
 import jingle from "./music/jingle_bells.js";
-import snowman from "./music/do_you_wanna_build_a_snowman.js";
 
 export default {
   name: "Lesson2",
@@ -59,10 +56,7 @@ export default {
   data: function () {
     return {
       mary: mary.data,
-      itsy: itsy.data,
-      twinkle: twinkle.data,
       jingle: jingle.data,
-      snowman: snowman.data,
     };
   },
 };
