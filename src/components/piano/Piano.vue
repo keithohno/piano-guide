@@ -38,7 +38,13 @@ export default {
     labels: { type: Array, default: () => [] },
     key_preset: { type: Number, default: 0 },
     scale_locked: { type: Boolean, default: false },
-    music_data: {
+    keypress_data: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    sticker_data: {
       type: Array,
       default: () => {
         return [];
@@ -135,16 +141,28 @@ export default {
           }
         },
         // convert array to object data
-        this.music_data.map((val) => {
-          return {
-            time: val[0] * (60 / this.bpm),
-            duration: val[1],
-            note: val[2],
-            octave: val[3],
-            type: val[4],
-            params: val[5] ? val[5] : 0,
-          };
-        })
+        this.keypress_data
+          .map((val) => {
+            return {
+              time: val[0] * (60 / this.bpm),
+              duration: val[1],
+              note: val[2],
+              octave: val[3],
+              type: 0,
+            };
+          })
+          .concat(
+            this.sticker_data.map((val) => {
+              return {
+                time: val[0] * (60 / this.bpm),
+                duration: val[1],
+                note: val[2],
+                octave: val[3],
+                type: 1,
+                params: val[4],
+              };
+            })
+          )
       );
 
       part.start(0);
