@@ -107,37 +107,38 @@ export default {
 
       let part = new Tone.Part(
         (time, val) => {
-          if ("note" in val) {
-            let note = val.note;
-            if (this.scale_locked) {
-              note = this.scale_to_step(note);
-            }
-            if (val.octave) {
-              note = note + 12 * val.octave;
-            }
-            // key press event
-            if (val.type === 0) {
-              // sound
-              synth.triggerAttackRelease(
-                this.step_to_hz(note),
-                val.duration * (60 / this.bpm)
-              );
-              // key press data
-              this.key_data[note + this.keynum] = 1;
-              setTimeout(() => {
-                this.key_data[note + this.keynum] = 0;
-              }, 1000 * (60 / this.bpm) * val.duration - 70);
-            }
-            // sticker event
-            else {
-              this.stickers[note + this.keynum] = val.params.toString();
-              setTimeout(() => {
-                this.stickers[note + this.keynum] = 0;
-              }, 1000 * (60 / this.bpm) * val.duration);
-            }
-            // end of music data
-          } else {
+          // end of music data
+          if (val.note === undefined) {
             this.$store.commit("setplay", false);
+            return;
+          }
+          // note calculation
+          let note = val.note;
+          if (this.scale_locked) {
+            note = this.scale_to_step(note);
+          }
+          if (val.octave) {
+            note = note + 12 * val.octave;
+          }
+          // key press event
+          if (val.type === 0) {
+            // sound
+            synth.triggerAttackRelease(
+              this.step_to_hz(note),
+              val.duration * (60 / this.bpm)
+            );
+            // key press data
+            this.key_data[note + this.keynum] = 1;
+            setTimeout(() => {
+              this.key_data[note + this.keynum] = 0;
+            }, 1000 * (60 / this.bpm) * val.duration - 70);
+          }
+          // sticker event
+          else {
+            this.stickers[note + this.keynum] = val.params.toString();
+            setTimeout(() => {
+              this.stickers[note + this.keynum] = 0;
+            }, 1000 * (60 / this.bpm) * val.duration);
           }
         },
         // convert array to object data
