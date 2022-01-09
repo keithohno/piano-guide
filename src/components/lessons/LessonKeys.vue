@@ -32,7 +32,7 @@
       :scale_locked="true"
       :scale_labeled="true"
       :labeled="true"
-      :music_data="happy"
+      :keypress_data="happy"
     />
     <p>
       Notice that we've also numbered the keys following the scale numbering
@@ -57,7 +57,7 @@
       :min_interactive="5"
       :max_interactive="16"
       :scale_locked="true"
-      :music_data="happy"
+      :keypress_data="happy"
       :labels="labels"
       @selectkey="handle_selectkey"
     />
@@ -94,7 +94,7 @@ export default {
   },
   data: function () {
     return {
-      happy: happy.data,
+      happy,
       key: null,
     };
   },

@@ -28,15 +28,17 @@
       title="Mary had a Little Lamb"
       :key_preset="0"
       :scale_locked="true"
-      :music_data="mary"
       :bpm="90"
+      :keypress_data="mary.keypress"
+      :sticker_data="mary.sticker"
     />
     <Piano
       title="Jingle Bells"
       :key_preset="0"
       :scale_locked="true"
-      :music_data="jingle"
       :bpm="120"
+      :keypress_data="jingle.keypress"
+      :sticker_data="jingle.sticker"
     />
   </div>
 </template>
@@ -55,8 +57,8 @@ export default {
   },
   data: function () {
     return {
-      mary: mary.data,
-      jingle: jingle.data,
+      mary: mary,
+      jingle: jingle,
     };
   },
 };

@@ -11,7 +11,7 @@
       title="The 12 Notes"
       :bpm="160"
       :key_preset="0"
-      :music_data="this.chromatic"
+      :keypress_data="chromatic.keypress"
       :labels="labels"
     />
     <p>
@@ -32,11 +32,11 @@
       :scale_locked="true"
       :interactive="true"
       :max_interactive="11"
-      :music_data="[
-        [0, 1, 1, 0, 0],
-        [1, 1, 8, 0, 0],
-        [3, 2, 1, 0, 0],
-        [3, 2, 8, 0, 0],
+      :keypress_data="[
+        [0, 1, 1, 0],
+        [1, 1, 8, 0],
+        [3, 2, 1, 0],
+        [3, 2, 8, 0],
         [5],
       ]"
       :labels="labels.concat(labels)"
@@ -73,7 +73,7 @@ export default {
   },
   data: function () {
     return {
-      chromatic: chromatic.data,
+      chromatic,
       labels: labels.whitekeys,
     };
   },

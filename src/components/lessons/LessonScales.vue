@@ -14,7 +14,7 @@
       :interactive="true"
       :max_interactive="11"
       :scale_locked="true"
-      :music_data="scale"
+      :keypress_data="scale.keypress"
     />
     <p>
       The specific spacing for notes on a scale turns out to be fundamental to
@@ -29,7 +29,7 @@
       :interactive="true"
       :max_interactive="11"
       :scale_locked="true"
-      :music_data="scale"
+      :keypress_data="scale.keypress"
       :labels="labels"
       @selectkey="handle_selectkey"
     />
@@ -61,7 +61,7 @@ export default {
   },
   data: function () {
     return {
-      scale: scale.data,
+      scale,
       key: null,
     };
   },

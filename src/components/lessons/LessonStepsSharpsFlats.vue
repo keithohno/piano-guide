@@ -15,14 +15,14 @@
       :notes="12"
       :interactive="true"
       :max_interactive="10"
-      :music_data="[[0, 1, 0, 0, 0], [1, 1, 1, 0, 0], [2]]"
+      :keypress_data="[[0, 1, 0, 0], [1, 1, 1, 0], [2]]"
     />
     <Piano
       title="Whole Step Demo"
       :notes="12"
       :interactive="true"
       :max_interactive="9"
-      :music_data="[[0, 1, 0, 0, 0], [1, 1, 2, 0, 0], [2]]"
+      :keypress_data="[[0, 1, 0, 0], [1, 1, 2, 0], [2]]"
     />
     <p>
       <strong>Sharps</strong> (#) raise the pitch of a note by one half-step.
@@ -32,7 +32,7 @@
     <Piano
       title="Sharps and Flats, Labeled"
       :key_preset="0"
-      :music_data="chromatic"
+      :keypress_data="chromatic.keypress"
       :labels="labels"
     />
     <p>
@@ -56,7 +56,7 @@ export default {
   },
   data: function () {
     return {
-      chromatic: chromatic.data,
+      chromatic: chromatic,
       labels: labels.allkeys,
     };
   },
